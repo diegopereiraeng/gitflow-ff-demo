@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<!-- for PRODUCTION -->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google" content="notranslate" />
+    <meta http-equiv="Content-Language" content="en" />
+    <title>Harness</title>
+    <link rel="icon" type="image/x-icon" href="https://app.harness.io/favicon.ico" />
+    <link rel="icon" type="image/png" href="https://app.harness.io/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="https://app.harness.io/css/third-party.css?69601" />
+    <link rel="stylesheet" type="text/css" href="https://app.harness.io/css/icons8/icons8.css?69601" />
+    <link rel="stylesheet" type="text/css" href="https://app.harness.io/css/wings-all.css?69601" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,400i,600&display=swap" />
+
+    <script type="text/javascript" src="https://app.harness.io/libs/cron-ui.js?69601"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+    <script>window.apiUrl = 'https://app.harness.io/gateway/api'</script>
+    <script>window.amplitudeToken = '3793b7d5148f12dbf57ef1098a706f48'</script>
+    <script>window.sentryToken = 'https://9f0ae2c3b6f84d28994fb75918436a7c@sentry.io/178786'</script>
+    <script>window.bugsnagToken = 'cd0538114d54d8e37cc11868cc2ce8be'</script>
+    <script>window.segmentToken = 'uJgvupvvGEocAuq1f1JfOHRkkqQi66Fm'</script>
+    <script>window.appDyEUMToken = 'AD-AAB-ABA-DKX'</script>
+    <script>
+      //
+      // Re-writting apiUrl to route to sub-domain.
+      //
+      // If:
+      //   1- apiUrl is provided
+      //   2- this is a sub-domain
+      //   3- and host in apiUrl is not the same as the sub-domain
+      // Then rewrite apiURL to take the host from the sub-domain
+      if (window.apiUrl && /^(.)+(\.harness\.io)$/.test(location.host)) {
+        const oldApiUrl = apiUrl
+        const host = location.host
+        const hostInApiURL = apiUrl.replace(/http(s?):\/\//i, '').split('/')[0]
+
+        if (hostInApiURL !== host) {
+          apiUrl = apiUrl.replace(hostInApiURL, host)
+          console.info('Rewrite apiUrl to take sub-domain %s -> %s', oldApiUrl, apiUrl)
+        }
+      }
+    </script>
+
+    <script>
+      // to set flags: override *_PLACEHOLDER strings using portal/install_harness.sh script or docker run.
+      function setFlag(flagName, placeholder) {
+        if (!placeholder) {
+          window[flagName] = true // set default value (e.g. docker env vars are not there)
+          return
+        }
+        window[flagName] = placeholder.replace(/_PLACEHOLDER/, '') === flagName
+      }
+      // override these flags for disabling:
+      setFlag('HARNESS_ENABLE_EXTERNAL_SCRIPTS', '')
+      setFlag('HARNESS_ENABLE_SENTRY', '')
+      setFlag('HARNESS_ENABLE_SABERFEEDBACK', '')
+      setFlag('HARNESS_ENABLE_MUNCHKIN', '')
+      setFlag('HARNESS_ENABLE_DRIFT', '')
+      setFlag('HARNESS_ENABLE_AMPLITUDE', '')
+      setFlag('HARNESS_ENABLE_ELEVIO', '')
+      setFlag('HARNESS_ENABLE_WALKME', '')
+      setFlag('HARNESS_ENABLE_GOOGLEANALYTICS', '')
+      setFlag('HARNESS_ENABLE_GET_IP_ADDRESS', '')
+      setFlag('HARNESS_ENABLE_BUGSNAG', '')
+      setFlag('HARNESS_ENABLE_HEADWAY', '')
+      setFlag('HARNESS_ENABLE_SEGMENT', '')
+      setFlag('HARNESS_ENABLE_APPDY_EUM', '')
+
+      // we cannot use `setFlag` because it assumes default value as true
+      window.HARNESS_ENABLE_NG_AUTH_UI = 'true' === 'true';
+
+      window.App = { locale: 'en-US' }
+      var _hostname = window.location.hostname
+      var _isLocalhost = _hostname === 'localhost'
+      var _isOnPrem = !_hostname.match(/harness\.io$/)
+      var _isQA = _hostname.match(/qa\.harness\.io$/)
+      var _isProd = _hostname.match(/app\.harness\.io$/)
+      var _isPR = _hostname.match(/pr\.harness\.io$/)
+      // final flags to use in the app:
+      window.enableSentry = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_SENTRY
+      window.enableMunchkin =
+        HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_MUNCHKIN && _hostname.indexOf('free.harness') >= 0
+      window.enableDrift = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_DRIFT && !_isLocalhost // don't enable for localhost
+      window.enableAmplitude = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_AMPLITUDE
+      window.enableElevio = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_ELEVIO && !window.Cypress
+      window.enableSaberFeedback = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_SABERFEEDBACK
+      window.enableWalkme = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_WALKME
+      window.enableGA =
+        HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_GOOGLEANALYTICS && _hostname.indexOf('app.harness') >= 0
+      window.enableGetIpAddress = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_GET_IP_ADDRESS
+      window.enableBugsnag = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_BUGSNAG && !_isLocalhost
+      window.enableHeadway = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_HEADWAY && (!_isOnPrem || _isLocalhost)
+      window.enableSegment = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_SEGMENT
+      window.enableAppDyEUM = HARNESS_ENABLE_EXTERNAL_SCRIPTS && HARNESS_ENABLE_APPDY_EUM
+      window.enableNgAuthUI = HARNESS_ENABLE_NG_AUTH_UI
+
+      function showElevioButton(showFlag) {
+        const btn = document.querySelector('._elevio_launcher')
+        if (btn && window.enableElevio) {
+          // for CI2 only for now.
+          btn.style.display = showFlag ? '' : 'none' // show Elevio Button again.
+        }
+      }
+    </script>
+
+    <!-- AppDynamic EUM -->
+    <script>
+      if(window.enableAppDyEUM && window.appDyEUMToken) {
+        ;(function(w, d, c) {
+          c.appKey = w.appDyEUMToken;
+          c.adrumExtUrlHttp = "http://cdn.appdynamics.com";
+          c.adrumExtUrlHttps = "https://cdn.appdynamics.com";
+          c.beaconUrlHttp = "http://pdx-col.eum-appdynamics.com";
+          c.beaconUrlHttps = "https://pdx-col.eum-appdynamics.com";
+          c.resTiming = {"bufSize":200,"clearResTimingOnBeaconSend":true};
+          c.maxUrlLength = 512;
+
+          var e = d.createElement('script')
+          e.setAttribute('type', 'text/javascript')
+          e.setAttribute('src', '//cdn.appdynamics.com/adrum/adrum-20.9.0.3268.js')
+          d.getElementsByTagName('head')[0].appendChild(e)
+        })(window, document, window["adrum-config"] || (window["adrum-config"] = {}))
+      }
+    </script>
+
+    <!-- Google Analytics -->
+    <script>
+      if (window.enableGA) {
+        ;(function(w, d, s, l, i) {
+          w[l] = w[l] || []
+          w[l].push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+          })
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : ''
+          j.async = true
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+          f.parentNode.insertBefore(j, f)
+        })(window, document, 'script', 'dataLayer', 'GTM-PC96RHZ')
+      }
+    </script>
+    <!-- Amplitude -->
+    <script type="text/javascript">
+      if (window.enableElevio && window.enableAmplitude) {
+        ;(function(e, t) {
+          var n = e.amplitude || { _q: [], _iq: {} }
+          var r = t.createElement('script')
+          r.type = 'text/javascript'
+          r.async = true
+          r.src = 'https://cdn.amplitude.com/libs/amplitude-4.5.2-min.gz.js'
+          r.integrity = 'sha384-f1maK8oMrCMNEWGGg3Hx3dMTOQBbXr4e1ZIjB/J0TcgJx5UeE0g5S5PM5BbWPe4E'
+          r.crossOrigin = 'anonymous'
+          r.onload = function() {
+            if (e.amplitude.runQueuedFunctions) {
+              e.amplitude.runQueuedFunctions()
+            } else {
+              console.log('[Amplitude] Error: could not load SDK')
+            }
+          }
+          var i = t.getElementsByTagName('script')[0]
+          i.parentNode.insertBefore(r, i)
+          function s(e, t) {
+            e.prototype[t] = function() {
+              this._q.push([t].concat(Array.prototype.slice.call(arguments, 0)))
+              return this
+            }
+          }
+          var o = function() {
+            this._q = []
+            return this
+          }
+          var a = ['add', 'append', 'clearAll', 'prepend', 'set', 'setOnce', 'unset']
+          for (var u = 0; u < a.length; u++) {
+            s(o, a[u])
+          }
+          n.Identify = o
+          var c = function() {
+            this._q = []
+            return this
+          }
+          var l = ['setProductId', 'setQuantity', 'setPrice', 'setRevenueType', 'setEventProperties']
+          for (var p = 0; p < l.length; p++) {
+            s(c, l[p])
+          }
+          n.Revenue = c
+          var d = [
+            'init',
+            'logEvent',
+            'logRevenue',
+            'setUserId',
+            'setUserProperties',
+            'setOptOut',
+            'setVersionName',
+            'setDomain',
+            'setDeviceId',
+            'setGlobalUserProperties',
+            'identify',
+            'clearUserProperties',
+            'setGroup',
+            'logRevenueV2',
+            'regenerateDeviceId',
+            'groupIdentify',
+            'logEventWithTimestamp',
+            'logEventWithGroups',
+            'setSessionId',
+            'resetSessionId'
+          ]
+          function v(e) {
+            function t(t) {
+              e[t] = function() {
+                e._q.push([t].concat(Array.prototype.slice.call(arguments, 0)))
+              }
+            }
+            for (var n = 0; n < d.length; n++) {
+              t(d[n])
+            }
+          }
+          v(n)
+          n.getInstance = function(e) {
+            e = (!e || e.length === 0 ? '$default_instance' : e).toLowerCase()
+            if (!n._iq.hasOwnProperty(e)) {
+              n._iq[e] = { _q: [] }
+              v(n._iq[e])
+            }
+            return n._iq[e]
+          }
+          e.amplitude = n
+        })(window, document)
+
+        window.amplitudeToken = window.amplitudeToken || '6f031cfe347d450e60443c23ea6cee20'
+        amplitude.getInstance().init(window.amplitudeToken, null, {
+          batchEvents: true
+          // apiEndpoint: 'tracker.wings.software' // use this when we have a pass-through proxy for api.amplitude.com
+        })
+      }
+    </script>
+    <!-- Segment -->
+    <script>
+      if(window.enableSegment){
+        ;(function () {
+          var analytics = (window.analytics = window.analytics || []);
+          if (!analytics.initialize)
+            if (analytics.invoked)
+              window.console &&
+                console.error &&
+                console.error("Segment snippet included twice.");
+            else {
+              analytics.invoked = !0;
+              analytics.methods = [
+                "trackSubmit",
+                "trackClick",
+                "trackLink",
+                "trackForm",
+                "pageview",
+                "identify",
+                "reset",
+                "group",
+                "track",
+                "ready",
+                "alias",
+                "debug",
+                "page",
+                "once",
+                "off",
+                "on",
+                "addSourceMiddleware",
+                "addIntegrationMiddleware",
+                "setAnonymousId",
+                "addDestinationMiddleware",
+              ];
+              analytics.factory = function (e) {
+                return function () {
+                  var t = Array.prototype.slice.call(arguments);
+                  t.unshift(e);
+                  analytics.push(t);
+                  return analytics;
+                };
+              };
+              for (var e = 0; e < analytics.methods.length; e++) {
+                var t = analytics.methods[e];
+                analytics[t] = analytics.factory(t);
+              }
+              analytics.load = function (e, t) {
+                var n = document.createElement("script");
+                n.type = "text/javascript";
+                n.async = !0;
+                n.src =
+                  "https://cdn.segment.com/analytics.js/v1/" + e + "/analytics.min.js";
+                var a = document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(n, a);
+                analytics._loadOptions = t;
+              };
+              analytics.SNIPPET_VERSION = "4.1.0";
+              window.segmentToken = window.segmentToken || "exa6lo7CnJXqKnR83itMpHYLY5fiajft"
+              analytics.load(window.segmentToken);
+            }
+        })();
+      }
+    </script>
+    <!-- SaberFeedback -->
+    <script type="text/javascript">
+      if (window.enableElevio && window.enableSaberFeedback) {
+        ;(function() {
+          window.Saber = {
+            com: [],
+            do: function() {
+              this.com.push(arguments)
+            }
+          }
+          var e = document.createElement('script')
+          e.setAttribute('type', 'text/javascript')
+          e.setAttribute('src', '//feedback.saberfeedback.com/feedback.js?api_key=dfb2bd6fa8f0cd828be1')
+          e.onload = function() {
+            Saber.do('set_option', 'hide_button', window.enableElevio ? true : false)
+            Saber.do('set_option', 'on_open', function() {
+              const elevio = document.querySelector('._elevio_widget')
+              setTimeout(function() {
+                // Elevio didn't completely fade out & blocked BM => force hide it:
+                elevio.style.display = 'none'
+              }, 1000)
+            })
+            Saber.do('set_option', 'on_close', function() {
+              showElevioButton(true)
+            })
+          }
+          document.getElementsByTagName('head')[0].appendChild(e)
+        })()
+      }
+    </script>
+    <link href="https://app.harness.io/client-styles.a5da7.css" rel="stylesheet"></head>
+
+<body harness-app class="hold-transition skin-blue-light font-nunito-googfont">
+<div class="sidebar-icon-toggle-box"></div>
+
+<div id="react-root"></div>
+
+<!-- Sentry.io (Raven) to track JS errors -->
+<script>
+      if (typeof window.Cypress !== 'undefined') {
+        window.sentryToken = 'https://69a9720930954233b9a75a5d060e81bd@sentry.io/1238841' // for ui tests
+      }
+      if (window.enableSentry && window.sentryToken) {
+        const sentryScript = document.createElement('script')
+        sentryScript.type = 'text/javascript'
+        sentryScript.async = true
+        sentryScript.crossOrigin = 'anonymous'
+        sentryScript.src = 'https://cdn.ravenjs.com/3.18.1/raven.min.js'
+        sentryScript.onload = function() {
+          // Sentry throws an error under unregistered domains. It breaks e2e integration.
+          try {
+            Raven.setRelease('')
+            Raven.config(window.sentryToken).install()
+          } catch (e) {}
+        }
+        document.querySelector('head').appendChild(sentryScript)
+      }
+    </script>
+<!-- Elevio - for integrations with Zendesk, SaberFeedback -->
+<script type="text/javascript">
+      if (window.enableElevio) {
+        // for CI2 only for now.
+        !(function(e, l, v, i, o, n) {
+          e[i] || (e[i] = {}), (e[i].account_id = n)
+          var g, h
+          ;(g = l.createElement(v)),
+            (g.type = 'text/javascript'),
+            (g.async = 1),
+            (g.src = o + n),
+            (h = l.getElementsByTagName(v)[0]),
+            h.parentNode.insertBefore(g, h)
+          e[i].q = []
+          e[i].on = function(z, y) {
+            e[i].q.push([z, y])
+          }
+        })(
+          window,
+          document,
+          'script',
+          '_elev',
+          'https://cdn.elev.io/sdk/bootloader/v4/elevio-bootloader.js?cid=',
+          '59cb2bedbe7f2'
+        )
+        /* Enable link in inline article pointing to Harness external document website */
+        window._elev.on('load', function(_elev) {
+          _elev.setSettings({
+            kbLink: function(params) {
+              return 'https://docs.harness.io/article/' + params.externalId
+            },
+            hideLauncher: window.localStorage.hideElevioLauncher === 'true'
+          })
+        })
+
+        function openZendeskSupport(e) {
+          const url = '/sso.html?action=login&brand_id=114095000394&locale_id=1&return_to=https%3A%2F%2Fsupport.harness.io%2Fhc%2Fen-us%2Frequests&src=zendesk&timestamp=' + Date.now()
+          e.stopPropagation()
+          e.preventDefault()
+          window.open(url)
+          return false
+        }
+        const zendeskModuleSelectors = '._elevio_module_icon._elevio_module_icon_16,._elevio_module_icon._elevio_module_icon_16 > div'
+
+        window._elev.on('widget:opened', function(_elev) {
+          try {
+            document
+              .querySelectorAll(zendeskModuleSelectors)
+              .forEach(function(element) {
+                element.addEventListener('click', openZendeskSupport,
+                false)
+              })
+          } catch (e) {}
+        })
+
+        window._elev.on('widget:closed', function(_elev) {
+          try {
+            document
+              .querySelectorAll(zendeskModuleSelectors)
+              .forEach(function(element) {
+                element.removeEventListener('click', openZendeskSupport,
+                false)
+              })
+          } catch (e) {}
+        })
+
+        // Harness custom code for Elevio:
+        window._elev.events = {
+          moduleOpened: function(moduleId) {
+            if (moduleId === 5) {
+              // clicked on SaberFeedback Module Id => open SaberFeedback panel
+              Saber.do('set_options', {
+                feedback_values: { _email: window.userEmail }
+              })
+              document.querySelector('._elevio_close').click()
+              setTimeout(function() {
+                Saber.do('open')
+              }, 500) // give enough time for Elevio panel fade out completely so it doesn't block other things.
+            }
+
+            if (moduleId === 15 && typeof drift !== 'undefined') {
+              // clicked on Custom Drift Chat button
+              var playbookId = 72136
+              if (!window.localStorage.isGratis || window.localStorage.isGratis === 'true') {
+              } else if (window.localStorage.isGratis === 'false') {
+                playbookId = 161072
+              }
+              if (window.userEmail) {
+                // set in Tracker.js
+                drift.identify(window.userEmail, {
+                  isFreemium: !!localStorage.isGratis
+                })
+              }
+              drift.api.startInteraction({ interactionId: playbookId, goToConversation: true })
+            }
+
+            if (moduleId !== 11) {
+              // don't hide Elivio when Walkme is active
+              setTimeout(function() {
+                showElevioButton(false) // hide the Elevio Button when a module is opened.
+              }, 1000) // give enough time for Elevio panel fade out completely so it doesn't block other things.
+            } else {
+              try {
+                WalkMeAPI.startFlowById(300118)
+              } catch (e) {}
+            }
+          }
+        }
+      }
+    </script>
+<!-- Chat Script -->
+<script type="text/javascript">
+      if (window.enableDrift) {
+        !(function() {
+          var t = (window.driftt = window.drift = window.driftt || [])
+          if (!t.init) {
+            if (t.invoked)
+              return void (window.console && console.error && console.error('Drift snippet included twice.'))
+            ;(t.invoked = !0),
+              (t.methods = [
+                'identify',
+                'config',
+                'track',
+                'reset',
+                'debug',
+                'show',
+                'ping',
+                'page',
+                'hide',
+                'off',
+                'on'
+              ]),
+              (t.factory = function(e) {
+                return function() {
+                  var n = Array.prototype.slice.call(arguments)
+                  return n.unshift(e), t.push(n), t
+                }
+              }),
+              t.methods.forEach(function(e) {
+                t[e] = t.factory(e)
+              }),
+              (t.load = function(t) {
+                var e = 3e5,
+                  n = Math.ceil(new Date() / e) * e,
+                  o = document.createElement('script')
+                ;(o.type = 'text/javascript'),
+                  (o.async = !0),
+                  (o.crossorigin = 'anonymous'),
+                  (o.src = 'https://js.driftt.com/include/' + n + '/' + t + '.js')
+                var i = document.getElementsByTagName('script')[0]
+                i.parentNode.insertBefore(o, i)
+              })
+          }
+        })()
+        drift.SNIPPET_VERSION = '0.3.1'
+        drift.load('72suywi6x9i2')
+
+        window.isDriftOnline = false
+        drift.on('ready', function(api, event) {
+          window.isDriftOnline = event.data.isOnline
+          api.widget.hide() // always hide the default Drift Chat button.
+          drift.on('sidebarClose', function(e) {
+            showElevioButton(true) // after closing Chat Panel, show Elevio Button again.
+          })
+        })
+      }
+    </script>
+<!-- Marketo Munchkin script -->
+<script type="text/javascript">
+      if (window.enableMunchkin) {
+        ;(function() {
+          var didInit = false
+          function initMunchkin() {
+            if (didInit === false) {
+              didInit = true
+              Munchkin.init('924-CQO-224')
+            }
+          }
+          var s = document.createElement('script')
+          s.type = 'text/javascript'
+          s.async = true
+          s.src = '//munchkin.marketo.net/munchkin.js'
+          s.onreadystatechange = function() {
+            if (this.readyState == 'complete' || this.readyState == 'loaded') {
+              initMunchkin()
+            }
+          }
+          s.onload = initMunchkin
+          document.getElementsByTagName('head')[0].appendChild(s)
+        })()
+      }
+    </script>
+<!-- GET IP Address Script -->
+<script type="application/javascript">
+      function getIP(json) {
+        window.currentIP = json ? json.ip : null
+      }
+    </script>
+<script type="text/javascript">
+      if (window.enableGetIpAddress) {
+        ;(function() {
+          var docScript = document.createElement('script')
+          docScript.type = 'text/javascript'
+          docScript.async = true
+          docScript.src = 'https://api.ipify.org?format=jsonp&callback=getIP'
+          document.getElementsByTagName('head')[0].appendChild(docScript)
+        })()
+      }
+    </script>
+<!-- Bugsnag -->
+<script>
+      if (window.enableBugsnag) {
+        const bugsnagScript = document.createElement('script')
+        bugsnagScript.type = 'text/javascript'
+        bugsnagScript.async = true
+        bugsnagScript.src = '//d2wy8f7a9ursnm.cloudfront.net/v5.0/bugsnag.min.js'
+        bugsnagScript.onload = function() {
+          window.bugsnagClient = bugsnag({
+            apiKey: '1fcf8f345280f354afb553181753544b',
+            appVersion: '-69601',
+            networkBreadcrumbsEnabled: false,
+            releaseStage: window.location.hostname.split('.')[0]
+          })
+        }
+        document.querySelector('head').appendChild(bugsnagScript)
+      }
+    </script>
+<script type="text/javascript" src="https://static.harness.io/static/vendors~client.b2503.js"></script><script type="text/javascript" src="https://static.harness.io/static/client.3f566.js"></script></body>
+</html>

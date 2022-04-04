@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Harness Banking App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src='./js/fontawesome.js' crossorigin='anonymous'></script>
+
+<!-- Appdynamics -->
+<script src="./js/appdynamics.js" charset="UTF-8" type="text/javascript"></script>
+<script src="//cdn.appdynamics.com/adrum/adrum-21.4.0.3405.js"></script>
+<!-- Banner Harness Customers -->
+<link rel="icon" href="http://harness.io/favicon.ico">
+<link rel="preload" href="http://harness.io/_next/static/css/188939d7872d14a389aa.css" as="style">
+<link rel="stylesheet" href="http://harness.io/_next/static/css/188939d7872d14a389aa.css" data-n-g="">
+<link rel="preload" href="http://harness.io/_next/static/css/2176213be4f33ba4a471.css" as="style">
+<link rel="stylesheet" href="http://harness.io/_next/static/css/2176213be4f33ba4a471.css" data-n-p="">
+<link rel="stylesheet" href="./harness-banner.css" data-n-p="">
+
+<!-- End Banner Harness Customers -->
+
+<link href="./seguros.css" type="text/css" rel="stylesheet"/>
+<link href="./maintenance.css" type="text/css" rel="stylesheet"/>
+<link href="./css/burgerMenu.css" type="text/css" rel="stylesheet"/>
+
+<!-- Youtube -->
+<link href="./youtube.css" type="text/css" rel="stylesheet"/>
+<script type="module" src="./js/youtube.js"></script>
+
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="./js/home.js"></script>
+<script type="module" src="./js/ff.js"></script>
+<!-- Modal -->
+<link href="./alert.css" type="text/css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    </head>
+<body class="harness-wildcard">
+<!-- Button trigger Youtube modal -->
+<button id="youtubebtn" type="button" class="btn btn-primary video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/VSHVo9jHMAk" data-target="#youtubeModal" style="display:none;">
+
+</button>
+<!-- Button HTML (to Trigger Alert Modal) -->
+<a id="modalButton" href="#myModal" class="trigger-btn" data-toggle="modal" style="display:none;"></a>
+
+<!-- Maitenance Mode -->
+<div id="maintenance" style="display: none;">
+
+    <div id="error">
+        <div id="box"></div>
+        <h3>Site under Maintenance</h3>
+        <p>Things are a little <span>unstable</span> here</p>
+        <p>I suggest come back later</p>
+    </div>
+    <p></p>
+    <p></p>
+
+
+</div>
+
+<!-- Harness CKO Mode -->
+<div id="cko2021" style="display: none;">
+    <iframe id="ckoContent" type="text/html" width="100%" height="1000px" class="embed-responsive-item" src="http://34.94.96.94:3000/" id="cko"  allowscriptaccess="always" title="Harness - CKO 2021" allow="autoplay" allowfullscreen></iframe>
+</div>
+
+
+<!-- Top container -->
+<div class="site" style="display: none;">
+
+<div class="menu" >
+<nav class="koala-sidebar w3-collapse harness-wildcard w3-animate-left" style="z-index:3;" id="mySidebar"><br>
+    <div class="w3-container w3-row" id="avatarDiv">
+        <div class="w3-col s4">
+            <img alt="Avatar" src="./images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
+        </div>
+        <div class="w3-col s8 w3-bar">
+            <span id="Welcome">Welcome, <strong>Diego</strong></span><br>
+            <a href="#" class="w3-bar-item w3-button"><em class="fa fa-envelope"></em></a>
+            <a href="#" class="w3-bar-item w3-button"><em class="fa fa-user"></em></a>
+            <a href="#" class="w3-bar-item w3-button"><em class="fa fa-cog"></em></a>
+        </div>
+    </div>
+    <div id="hrDiv"><hr id="hr"></div>
+
+    <div class="w3-container" style="text-align: left;" id="menuTitle">
+        <h4>Menu</h4>
+    </div>
+    <div id="menuID">
+        <div class="w3-bar-block">
+            <!-- Menu Content -->
+        </div>
+    </div>
+</nav>
+</div>
+
+<div id="header-container" class="header harness-wildcard">
+    <div id="menu" class="menu">
+        <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><em class="fa fa-bars"></em>  Menu</button>
+    </div>
+
+    <div id="titulo" class="titulo">
+        Banking App
+    </div>
+    <div id="logo" class="logo" style="margin-right:0px;height:30">
+        <img id="logo-img" alt="logo" src="./images/harness-light.svg" height="25" width="214">
+    </div>
+
+</div>
+
+
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:275px;margin-top:3px;" id="mainPageContent">
+    <iframe title="Body Content" id="iframeContent" src="" style="z-index: 2;border: none;display: none;" width="500px" height="500px"></iframe>
+</div>
+
+<div id="homeContent" class="w3-main" style="margin-left:275px;margin-top:3px;">
+
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:0px">
+        <h5><strong><em class="fa fa-dashboard"></em> My Dashboard</strong></h5>
+    </header>
+
+    <div class="w3-row-padding w3-margin-bottom" id="dashboard">
+        <div class="w3-quarter" style="display: none;" id="Messages">
+            <div class="w3-container w3-blue w3-padding-16 harness-dashboard">
+                <div class="w3-left"><em class="fa fa-comment w3-xxxlarge"></em></div>
+                <div class="w3-right">
+                    <h4>52</h4>
+                </div>
+                <div class="w3-clear"></div>
+                <h4>Messages</h4>
+            </div>
+        </div>
+
+        <div class="w3-quarter" style="display: none;" id="Balance">
+            <div class="w3-container w3-blue w3-padding-16 harness-dashboard">
+                <div class="w3-left"><em class="fas fa-dollar-sign w3-xxxlarge"></em></div>
+                <div class="w3-right">
+                    <h4>$34,457.07</h4>
+                </div>
+                <div class="w3-clear"></div>
+                <h4>Balance</h4>
+            </div>
+        </div>
+        <div class="w3-quarter" style="display: none;" id="Loan">
+            <div class="w3-container w3-blue w3-padding-16 harness-dashboard">
+                <div class="w3-left"><em class="fas fa-hand-holding-usd w3-xxxlarge"></em></div>
+                <div class="w3-right">
+                    <h4><strong>$2,313.07</strong></h4>
+                </div>
+                <div class="w3-clear"></div>
+                <h4>Loan</h4>
+            </div>
+        </div>
+        <div class="w3-quarter" style="display: none;" id="Bills">
+            <div class="w3-container w3-blue w3-padding-16 harness-dashboard">
+                <div class="w3-left"><em class="far fa-money-bill-alt w3-xxxlarge"></em></div>
+                <div class="w3-right">
+                    <h4><strong>37</strong></h4>
+                </div>
+                <div class="w3-clear"></div>
+                <h4>Bills</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-panel">
+        <div class="w3-row-padding" style="margin:0 -16px">
+            <!-- Banner ---->
+            <section id="scrolling-partners-section" style="display: none;" >
+                <div class="CustomerLogos_customers__1ED6S CustomerLogos_bgDot__3gR5l">
+                    <div class="CustomerLogos_consumerList__3Zo7d">
+                        <div class=" marquee-container" style="--pause-on-hover:running; --pause-on-click:running;">
+                            <div class="marquee" style="--play:running; --direction:normal; --duration:196s; --delay:0s; --iteration-count:infinite;">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ebay_12dd4c3a60.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/capital_one_e2b9c8aae2.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/vmware_772b2447a5.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/openbank_7d81a444a4.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/soulcycle_01c3339e22.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/gannett_a5bcfe3583.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ncr_44ceda7801.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/jobvite_4994adeeef.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ancestry_25c0a38d8d.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/beachbody_1fea5176cf.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ebay_12dd4c3a60.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/capital_one_e2b9c8aae2.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/vmware_772b2447a5.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/openbank_7d81a444a4.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/soulcycle_01c3339e22.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/gannett_a5bcfe3583.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ncr_44ceda7801.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/jobvite_4994adeeef.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ancestry_25c0a38d8d.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/beachbody_1fea5176cf.svg" width="224" height="64">
+                            </div>
+                            <div class="marquee" style="--play:running; --direction:normal; --duration:196s; --delay:0s; --iteration-count:infinite;">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ebay_12dd4c3a60.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/capital_one_e2b9c8aae2.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/vmware_772b2447a5.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/openbank_7d81a444a4.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/soulcycle_01c3339e22.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/gannett_a5bcfe3583.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ncr_44ceda7801.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/jobvite_4994adeeef.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ancestry_25c0a38d8d.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/beachbody_1fea5176cf.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ebay_12dd4c3a60.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/capital_one_e2b9c8aae2.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/vmware_772b2447a5.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/openbank_7d81a444a4.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/soulcycle_01c3339e22.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/gannett_a5bcfe3583.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ncr_44ceda7801.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/jobvite_4994adeeef.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/ancestry_25c0a38d8d.svg" width="224" height="64">
+                                <img alt="Customer" class="CustomerLogos_marqueeImg__1yMDW" src="https://cms.harness.io/uploads/beachbody_1fea5176cf.svg" width="224" height="64">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="CustomerLogos_btnContainer__1iJAz">
+                        <a href="/customers/">
+                            <button type="button" class="ant-btn CustomerLogos_btnLight__tvE6y">
+                                <span>Meet Our Customers</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <!-- Banner ---->
+            <div class="w3-third">
+                <h5>Regions</h5>
+                <img src="./images/region.jpeg" style="width:100%" alt="Google Regional Map">
+            </div>
+            <div class="w3-twothird">
+                <h5>Account activities</h5>
+                <table class="w3-table w3-striped w3-white">
+                    <caption>Bank Activities</caption>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Store </th>
+                        <th scope="col">Price</th>
+                    </tr>
+                    <tr>
+                        <td><em class="fa fa-user w3-text-blue w3-large"></em></td>
+                        <td>Bob's Burger</td>
+                        <td><em>$ 10</em></td>
+                    </tr>
+                    <tr>
+                        <td><em class="fa fa-bell w3-text-red w3-large"></em></td>
+                        <td>Pandora</td>
+                        <td><em>$ 300</em></td>
+                    </tr>
+                    <tr>
+                        <td><em class="fa fa-users w3-text-yellow w3-large"></em></td>
+                        <td>Calvin Klein</td>
+                        <td><em>$ 245</em></td>
+                    </tr>
+                    <tr>
+                        <td><em class="fa fa-comment w3-text-red w3-large"></em></td>
+                        <td>Adidas</td>
+                        <td><em> $ 45</em></td>
+                    </tr>
+                    <tr>
+                        <td><em class="fa fa-bookmark w3-text-blue w3-large"></em></td>
+                        <td>Bakery</td>
+                        <td><em>$ 5</em></td>
+                    </tr>
+                    <tr>
+                        <td><em class="fa fa-laptop w3-text-red w3-large"></em></td>
+                        <td>Asus</td>
+                        <td><em>$ 349</em></td>
+                    </tr>
+                    <tr>
+                        <td><em class="fa fa-share-alt w3-text-green w3-large"></em></td>
+                        <td>Walmart</td>
+                        <td><em>$ 90</em></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="w3-container">
+        <h5>General Stats</h5>
+        <p>New Visitors</p>
+        <div class="w3-grey">
+            <div class="w3-container w3-center w3-padding w3-green" style="width:25%">+25%</div>
+        </div>
+
+        <p>New Users</p>
+        <div class="w3-grey">
+            <div class="w3-container w3-center w3-padding w3-orange" style="width:50%">50%</div>
+        </div>
+
+        <p>Bounce Rate</p>
+        <div class="w3-grey">
+            <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="w3-container">
+        <h5>Countries</h5>
+        <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+            <tr>
+                <td>United States</td>
+                <td>65%</td>
+            </tr>
+            <tr>
+                <td>UK</td>
+                <td>15.7%</td>
+            </tr>
+            <tr>
+                <td>Brazil</td>
+                <td>5.6%</td>
+            </tr>
+            <tr>
+                <td>Spain</td>
+                <td>2.1%</td>
+            </tr>
+            <tr>
+                <td>India</td>
+                <td>1.9%</td>
+            </tr>
+            <tr>
+                <td>France</td>
+                <td>1.5%</td>
+            </tr>
+        </table><br>
+        <button class="w3-button w3-dark-grey">More Countries  <em class="fa fa-arrow-right"></em></button>
+    </div>
+    <hr>
+    <div class="w3-container">
+        <h5>Recent Users</h5>
+        <ul class="w3-ul w3-card-4 w3-white">
+            <li class="w3-padding-16">
+                <img alt="avatar" src="./images/avatar3.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+                <span class="w3-xlarge">Diego</span><br>
+            </li>
+            <li class="w3-padding-16">
+                <img alt="avatar" src="./images/avatar5.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+                <span class="w3-xlarge">Thiago</span><br>
+            </li>
+            <li class="w3-padding-16">
+                <img alt="avatar" src="./images/avatar6.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+                <span class="w3-xlarge">Luisa</span><br>
+            </li>
+            <li class="w3-padding-16">
+                <img alt="avatar" src="./images/avatar3.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+                <span class="w3-xlarge">Rangel</span><br>
+            </li>
+            <li class="w3-padding-16">
+                <img alt="avatar" src="./images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+                <span class="w3-xlarge">Leif</span><br>
+            </li>
+            <li class="w3-padding-16">
+                <img alt="avatar" src="./images/avatar1.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+                <span class="w3-xlarge">Pementa</span><br>
+            </li>
+        </ul>
+    </div>
+    <hr>
+
+    <div class="w3-container">
+        <h5>Recent Comments</h5>
+        <div class="w3-row">
+            <div class="w3-col m2 text-center">
+                <img alt="avatar" class="w3-circle" src="./images/avatar3.png" style="width:96px;height:96px">
+            </div>
+            <div class="w3-col m10 w3-container">
+                <h4>Diego <span class="w3-opacity w3-medium">Sep 28, 2021, 9:12 PM</span></h4>
+                <p>Why Feature Flags?</p>
+                <p>- Sales and Customer Support to provision entitlements.</p>
+                <p>- Product Management to manage beta programs.</p>
+                <p>- Reduce the number of code rollbacks.</p>
+                <p>- Gradually roll out new functionality to users.</p>
+                <p>- Minimize the risk of a release by first releasing to small groups of users.</p>
+                <p>- Test user acceptance.</p>
+
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col m2 text-center">
+                <img alt="avatar" class="w3-circle" src="./images/avatar1.png" style="width:96px;height:96px">
+            </div>
+            <div class="w3-col m10 w3-container">
+                <h4>Luis Redda <span class="w3-opacity w3-medium">Sep 28, 2021, 10:15 PM</span></h4>
+                <p>One of the problems in Business We want to solve using FF:</p>
+                <p>When teams are beholden to engineering release cycles (e.g. once a month), multiple features are released simultaneously, </p><p>introducing complexity and risk that can result in deployment war rooms, large rollbacks, and dissatisfied customers.</p>
+
+                <br>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col m2 text-center">
+                <img alt="avatar" class="w3-circle" src="./images/avatar3.png" style="width:96px;height:96px">
+            </div>
+            <div class="w3-col m10 w3-container">
+                <h4>Patrick <span class="w3-opacity w3-medium">Sep 29, 2021, 11:27 PM</span></h4>
+                <p>You may be thinking, “Feature flags seem pretty simple, can’t we just build this ourselves?”</p>
+                <p>The real answer? It’s complicated.</p>
+                <p>We’ve seen in most cases that an internally-built tool will end up causing a lot of overhead and putting a very low ceiling on the benefits you can receive from feature flags. It may be good for your first couple of flags, but it can be hard to make an internal system scalable, performant, and robust for all the things flags can do as your organization gets more and more comfortable using them – and more reliant on them.</p>
+                <p>For a deeper look at the build vs buy conversation, you can check out an article we wrote earlier this month, Feature Flags: <a href="https://harness.io/blog/product-updates/introducing-harness-feature-flags/">Should I Build or Buy?</a></p>
+            </div>
+        </div>
+
+
+        <div class="w3-row">
+            <div class="w3-col m2 text-center">
+                <img alt="avatar" class="w3-circle" src="./images/avatar1.png" style="width:96px;height:96px">
+            </div>
+            <div class="w3-col m10 w3-container">
+                <h4>Guilherme <span class="w3-opacity w3-medium">Sep 30, 2021, 3:56 PM</span></h4>
+                <p>Feature flags eliminate the need to maintain multiple feature branches within your source code. All code changes can be made to the primary branch, only when the feature is ready will it be enabled via the flag.</p><br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="w3-container w3-dark-grey w3-padding-32">
+        <div class="w3-row">
+            <div class="w3-container w3-third">
+                <h5 class="w3-bottombar w3-border-green">Demographic</h5>
+                <p>Language</p>
+                <p>Country</p>
+                <p>City</p>
+            </div>
+            <div class="w3-container w3-third">
+                <h5 class="w3-bottombar w3-border-red">System</h5>
+                <p>Browser</p>
+                <p>OS</p>
+                <p>More</p>
+            </div>
+            <div class="w3-container w3-third">
+                <h5 class="w3-bottombar w3-border-orange">Target</h5>
+                <p>Users</p>
+                <p>Active</p>
+                <p>Geo</p>
+                <p>Interests</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-16 ">
+
+    </footer>
+
+    <!-- End page content -->
+</div>
+    <!-- Youtube Modal -->
+    <div class="modal fade" id="youtubeModal" tabindex="-1" role="dialog" aria-labelledby="Harness on Youtube" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+
+                <div class="modal-body" >
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <!-- 16:9 aspect ratio -->
+                    <div class="embed-responsive embed-responsive-16by9" width="720" height="405" >
+                        <!--iframe id="video" class="embed-responsive-item" src="https://www.youtube.com/embed/VSHVo9jHMAk" title="Captain Canary" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe-->
+                        <iframe id="youtubeID" type="text/html" width="720" height="405" class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" title="Captain Canary" allow="autoplay" allowfullscreen></iframe>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
+<!-- Modal ---->
+
+<!-- Alert Modal HTML -->
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <em id="iconModal" class="material-icons">&#xE876;</em> <!-- &#xE5CD;  Error-->
+                </div>
+                <h4 id="modalTitle" class="modal-title w-100">Awesome!</h4>
+            </div>
+            <div class="modal-body">
+                <p id="ModalMessage" class="text-center">Your Premium Trial will expire soon, click here to choose a package plan.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
