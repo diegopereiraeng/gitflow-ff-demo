@@ -485,7 +485,7 @@ function Home_Menu(flag) {
 		}
 	}
 	else if (MenuVersion == "v2") {
-    	checkMenuV2();
+        checkMenuV2();
     }
 }
 function Index_Body_Color(flag) {
@@ -638,7 +638,6 @@ function checkMenu(){
 
         menuSelectedStyle=menuSelected
         $(newLink).append('<i class="fas '+objectIcon+' fa-fw '+iconclass+'"></i>'+"  "+value.name);
-        //$(newLink).append('<i class="fa fa-fw"></i>'+"  "+value.name);
         if(close == 0 ){
             $(newCloseLink).append('<i class="fa fa-remove fa-fw"></i>  Close Menu');
             close = 1;
@@ -651,7 +650,7 @@ function checkMenu(){
 
         $(newLink).appendTo(".w3-bar-block");
         console.log(newLink);
-    };
+    }
 
 }
 
@@ -784,7 +783,6 @@ function checkMenuV2(flag){
 
 		menuSelectedStyle=menuSelected
 		$(newLink).append('<i title="'+value.name+'" class="fas '+objectIcon+' fa-fw '+iconclass+'"></i>');
-		//$(newLink).append('<i class="fa fa-fw"></i>'+"  "+value.name);
 		if(close == 0 ){
 			$(newCloseLink).append('<i class="fa fa-remove fa-fw"></i>');
 			close = 1;
@@ -797,7 +795,7 @@ function checkMenuV2(flag){
 
 		$(newLink).appendTo(".w3-bar-block");
 		console.log(newLink);
-	};
+	}
 }
 
 /* END FEATURE FLAGS FUNCTIONS */
@@ -1306,7 +1304,7 @@ function checkAddUsers(){
        }
     }
     try{
-        namey.get({ type: `${gender}` ,with_surname: true, callback: function(user) { console.log(user);console.log(typeof(user)); for (const [key, value] of Object.entries(user)) {console.log(`${value}`); ;window.localStorage.setItem('harnessDemoUser', `${value}` ) };  }}); ;
+        namey.get({ type: `${gender}` ,with_surname: true, callback: function(user) { console.log(user);console.log(typeof(user)); for (const [key, value] of Object.entries(user)) {console.log(`${value}`); window.localStorage.setItem('harnessDemoUser', `${value}` ) }  }});
     }
     catch(error){
         console.log("Namey script is not defined"+ error)

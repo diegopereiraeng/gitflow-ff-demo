@@ -2,7 +2,15 @@
   "dependencies": {
     "@harnessio/ff-javascript-client-sdk": "^1.4.9"
   },
+  "scripts": {
+    "lint": "eslint --ext .js html --config eslintrc.json --format junit --output-file html/reports/eslint/eslint.xml",
+    "lint2": "eslint --ext .js html --config eslintrc.json --format junit --output-file html/reports/eslint/eslint2.xml",
+    "lint:fix": "npm run lint -- --fix",
+    "coverage": "echo \"running coverage test!!\"",
+    "coverage:drone": "npm run coverage"
+  },
   "devDependencies": {
-    "sass": "^1.35.2"
+    "sass": "^1.35.2",
+    "eslint": "^7.32.0"
   }
 }

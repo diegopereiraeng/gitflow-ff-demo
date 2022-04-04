@@ -1,8 +1,12 @@
 ## FF Banking App Front
 
+GITFLOW DEMO + FF
+
 Control your features through Harness FF GUI.
 
+Open a PR to dev with branch name called "feature-<your git user>"
 
+[Open PR](https://github.com/diegopereiraeng/gitflow-ff-demo/compare) 
 
 Build and run:
 ```
