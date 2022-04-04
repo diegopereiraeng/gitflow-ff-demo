@@ -7,7 +7,6 @@ Control your features through Harness FF GUI.
 Open a PR to dev with branch name called "feature-<your git user>"
 
 
-
 Build and run:
 ```
 BUILD=230
