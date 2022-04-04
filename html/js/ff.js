@@ -1304,7 +1304,7 @@ function checkAddUsers(){
        }
     }
     try{
-        namey.get({ type: `${gender}` ,with_surname: true, callback: function(user) { console.log(user);console.log(typeof(user)); for (const [key, value] of Object.entries(user)) {console.log(`${value}`); window.localStorage.setItem('harnessDemoUser', `${value}` ) };  }});
+        namey.get({ type: `${gender}` ,with_surname: true, callback: function(user) { console.log(user);console.log(typeof(user)); for (const [key, value] of Object.entries(user)) {console.log(`${value}`); window.localStorage.setItem('harnessDemoUser', `${value}` ) }  }});
     }
     catch(error){
         console.log("Namey script is not defined"+ error)
