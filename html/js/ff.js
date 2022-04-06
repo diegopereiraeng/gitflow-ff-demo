@@ -1,4 +1,5 @@
 import { initialize, Event } from 'https://unpkg.com/@harnessio/ff-javascript-client-sdk@1.4.10/dist/sdk.client.js'
+
 var target = getTarget()
 var menuStyle = ''
 var menuSelectedStyle= 'w3-blue'
@@ -119,6 +120,33 @@ $( function() {
 } );
 
 /* START FEATURE FLAGS FUNCTIONS */
+
+var qr_code_status = "false"
+
+$(document).ready(function() {
+
+  $("#qrButton").click(function () {
+	if (qr_code_status == "true"){
+		$("#mpo-modal-controller").show();
+	}else
+	{
+		$("#mpo-modal-controller").hide();
+	}
+  });
+
+});
+
+function QRCODE(flag){
+	console.log("Checking QRCODE Flag")
+	console.log("Current URL: "+window.location.href)
+
+	if(flag != qr_code_status)
+	{
+		$("body").find("#qrButton").click();
+		qr_code_status = flag
+	}
+
+}
 
 function HalloweenSongEnabled(flag) {
 	if (ready) {
