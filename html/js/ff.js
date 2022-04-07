@@ -1,4 +1,5 @@
 import { initialize, Event } from 'https://unpkg.com/@harnessio/ff-javascript-client-sdk@1.4.10/dist/sdk.client.js'
+
 var target = getTarget()
 var menuStyle = ''
 var menuSelectedStyle= 'w3-blue'
@@ -11,77 +12,56 @@ const cf = initialize(
     target
 );
 
+function defineTargetObject(id,name,company,email){
+    var targetObj
+    let platform = navigator?.userAgentData?.platform || navigator?.platform || 'unknown'
+    targetObj = {
+        identifier: id,
+        name: name,
+        attributes: {
+            email: email,
+            Company: company,
+            Name: name,
+            timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone),
+            platform: platform,
+            mobile: navigator?.userAgentData?.mobile || navigator?.mobile || 'unknown' ,
+            language: navigator.language
+        }
+    }
+    return targetObj
+}
+
 function getTarget(){
     var targetObj
     if(typeof(Storage) !== "undefined"){
 
         if((typeof(window.localStorage.harnessDemoSignUpEmail) !== "undefined") && typeof(window.localStorage.harnessDemoCompany) !== "undefined"){
             if (window.location.href.indexOf("index.html") > -1) {
-                targetObj = {
-                            identifier: 'Guest',
-                            name: "Guest",
-                            attributes: {
-                            email: "community@harness.io",
-                            Company: "Community",
-                            Name: "Visitor"
-                        }
-                }
+                targetObj = defineTargetObject('Guest','Guest','Community',"community@harness.io")
                 var customer = window.localStorage.harnessCustomer
                 if (customer == 'true') {
                     var ffID = (window.localStorage.harnessDemoSignUpEmail).replace(/[^a-zA-Z]/g, "");
-                    targetObj = {
-                        identifier: ffID,
-                        name: window.localStorage.harnessDemoSignUpName,
-                        attributes: {
-                            email: window.localStorage.harnessDemoSignUpEmail,
-                            Company: window.localStorage.harnessDemoSignUpCompany,
-                            Name: window.localStorage.harnessDemoSignUpName
-                        }
-                    }
+                    targetObj = defineTargetObject(ffID,window.localStorage.harnessDemoSignUpName,window.localStorage.harnessDemoSignUpCompany,window.localStorage.harnessDemoSignUpEmail)
                     menuStyle = 'new_menu'
                 }
             }
             else{
                 var ffID = (window.localStorage.harnessDemoSignUpEmail).replace(/[^a-zA-Z]/g, "");
-                targetObj = {
-                        identifier: ffID,
-                        name: window.localStorage.harnessDemoSignUpName,
-                        attributes: {
-                        email: window.localStorage.harnessDemoSignUpEmail,
-                        Company: window.localStorage.harnessDemoSignUpCompany,
-                        Name: window.localStorage.harnessDemoSignUpName
-                    }
-                }
+                targetObj = defineTargetObject(ffID,window.localStorage.harnessDemoSignUpName,window.localStorage.harnessDemoSignUpCompany,window.localStorage.harnessDemoSignUpEmail)
             }
-            
+
             var welcome = $("body").find("#Welcome")
             welcome.text("");
             welcome.append("Welcome, <br><strong>"+window.localStorage.harnessDemoSignUpName+"</strong>")
 
         }
         else{
-            targetObj = {
-                  identifier: 'Guest',
-                  name: "Guest",
-                  attributes: {
-                    email: "community@harness.io",
-                    Company: "Community",
-                    Name: "Visitor"
-                  }
-                }
+            targetObj = defineTargetObject('Guest','Guest','Community',"community@harness.io")
         }
     }
     else
     {
-        targetObj = {
-              identifier: 'Guest',
-              name: "Guest",
-              attributes: {
-                email: "community@harness.io",
-                Company: "Community",
-                Name: "Visitor"
-              }
-            }
+        targetObj = defineTargetObject('Guest','Guest','Community',"community@harness.io")
     }
     return targetObj
 }
@@ -105,13 +85,13 @@ var backgroundBackup = "#2f81d4"
 /* End FF Control */
 
 function init() {
-  refresh();
-  //setInterval(refresh, 10000);
+    refresh();
+    //setInterval(refresh, 10000);
 }
 
 var ready = false
 document.addEventListener("DOMContentLoaded", function(event) {
-  ready = true
+    ready = true
 });
 var jackWords = ['Harness','Im Jack','Ouch','Halloween','Candy?','Threats =D','Stop it','Booo'];
 function randomWord(arr) {
@@ -140,6 +120,33 @@ $( function() {
 } );
 
 /* START FEATURE FLAGS FUNCTIONS */
+
+var qr_code_status = "false"
+
+$(document).ready(function() {
+
+  $("#qrButton").click(function () {
+	if (qr_code_status == "true"){
+		$("#mpo-modal-controller").show();
+	}else
+	{
+		$("#mpo-modal-controller").hide();
+	}
+  });
+
+});
+
+function QRCODE(flag){
+	console.log("Checking QRCODE Flag")
+	console.log("Current URL: "+window.location.href)
+
+	if(flag != qr_code_status)
+	{
+		$("body").find("#qrButton").click();
+		qr_code_status = flag
+	}
+
+}
 
 function HalloweenSongEnabled(flag) {
 	if (ready) {
