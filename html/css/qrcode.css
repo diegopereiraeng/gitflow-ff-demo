@@ -73,11 +73,11 @@
 }
 
 .mpo-modal-content {
-  margin: auto;
-  padding: 20px 0 0;
   position: relative;
   text-align: center;
-  left: 50px;
+  display: inline-block;
+  margin: 0 auto;
+  padding: 3px;
 }
 
 .mpo-modal-slide {
