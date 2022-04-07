@@ -35,7 +35,7 @@
 [Open PR](https://github.com/diegopereiraeng/gitflow-ff-demo/compare) 
 
 
-Wait for the deployment and access your app on http://ff.harness-demo.site/\<yourGitUser\>/index.html
+Wait for the deployment and access your app on http://ff.harness-demo.site/(yourGitUser)/index.html
 
 Build and run:
 ```
