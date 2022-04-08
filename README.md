@@ -8,7 +8,7 @@
 
 3 - Instead of commit direct to dev, please click in "Create a new branch for this commit and start a pull request"
 
-4 - Fill the branch name with this name pattern "feature-<your git user>"
+4 - Fill the branch name with this name pattern "feature-[your git user]"
 
 5 - Open a PR to dev using the link below. (dev branch should be selected in the left side as target branch, and your feature branch in the right as source branch)
 
