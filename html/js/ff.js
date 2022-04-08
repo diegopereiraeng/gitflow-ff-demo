@@ -31,6 +31,7 @@ function defineTargetObject(id,name,company,email){
     return targetObj
 }
 
+
 function getTarget(){
     var targetObj
     if(typeof(Storage) !== "undefined"){
