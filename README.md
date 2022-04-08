@@ -54,7 +54,9 @@ Wait for the deployment and access your app on http://ff.harness-demo.site/[Your
 
 Wait for the deployment and access your app on http://ff.harness-demo.site/<yourGitUser>/index.html
 
-Build and run:
+  
+
+## Build and run:
 ```
 BUILD=230
 docker build -t us.gcr.io/playground-243019/cv-demo-ui:$BUILD -f Dockerfile .
