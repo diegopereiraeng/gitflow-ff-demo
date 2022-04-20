@@ -1,6 +1,22 @@
 {
   "dependencies": {
     "@harnessio/ff-javascript-client-sdk": "^1.4.9"
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.1",
+    "consolidate": "^0.14.1",
+    "csurf": "^1.8.3",
+    "dont-sniff-mimetype": "^1.0.0",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "forever": "^2.0.0",
+    "helmet": "^2.0.0",
+    "marked": "0.3.9",
+    "mongodb": "^2.1.18",
+    "needle": "2.2.4",
+    "node-esapi": "0.0.1",
+    "serve-favicon": "^2.3.0",
+    "swig": "^1.4.2",
+    "underscore": "^1.8.3"
   },
   "scripts": {
     "lint": "eslint --ext .js html --config eslintrc.json --format junit --output-file html/reports/eslint/eslint.xml",
