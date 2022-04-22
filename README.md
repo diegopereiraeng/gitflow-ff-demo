@@ -1,6 +1,23 @@
 # FF Banking App Front - GITFLOW DEMO + FF
 
-## SETUP
+## GITFLOW DEMO
+
+1 - Open the file [ff.js](https://github.com/diegopereiraeng/gitflow-ff-demo/edit/master/html/js/ff.js)
+
+2 - Make any changes like add a space into the code. (Simulate that a dev gonna change the code - adding a new feature or fixing or enhancing an existing one)
+
+3 - Instead of commit direct to dev, please click in "Create a new branch for this commit and start a pull request"
+
+4 - Fill the branch name with this name pattern "feature-<your git user>"
+
+5 - Open a PR to dev using the link below. (dev branch should be selected in the left side as target branch, and your feature branch in the right as source branch)
+
+[Open PR](https://github.com/diegopereiraeng/gitflow-ff-demo/compare) 
+
+Wait for the deployment and access your app on http://ff.harness-demo.site/[YourGitUser]/index.html
+
+
+## FF SETUP
 
 1 - Go to Harness Software Delivery Demo Account
 
@@ -19,7 +36,7 @@
 8 - You are ready to run the demo.
 
 
-## DEMO
+## FF DEMO DEPLOY
 
 
 1 - Open the file [ff.js](https://github.com/diegopereiraeng/gitflow-ff-demo/edit/master/html/js/ff.js)
