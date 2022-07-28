@@ -119,7 +119,7 @@ $( function() {
 )
 } );
 
-/* START FEATURE FLAGS FUNCTIONS */
+/* START FEATURE FLAGS FUNCTIONS1 */
 
 var qr_code_status = "false"
 
