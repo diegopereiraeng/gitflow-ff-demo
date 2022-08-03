@@ -7,7 +7,7 @@ var firstStart = true
 var currentContent
 var MenuVersion = "v1"
 
-const cf = initialize
+const cf = initialize(
     'ffbe05e1-6829-4c68-883b-575d097f3aac',
     target
 );
