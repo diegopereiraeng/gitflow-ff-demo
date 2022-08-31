@@ -1,4 +1,4 @@
-import { initialize, Event } from 'https://unpkg.com/@harnessio/ff-javascript-client-sdk@1.4.10/dist/sdk.client.js'
+import { initialize, Event } from 'https://unpkg.com/@harnessio/ff-javascript-client-sdk@1.4.11/dist/sdk.client.js'
 
 var target = getTarget()
 var menuStyle = ''
@@ -8,7 +8,7 @@ var currentContent
 var MenuVersion = "v1"
 
 const cf = initialize(
-    '44e3ffcb-3a5e-4af1-a7f3-ba7a51cbc74b',
+    '463ae6d8-8434-46d8-a070-0485039a7a88',
     target
 );
 
