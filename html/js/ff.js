@@ -2,14 +2,14 @@ import { initialize, Event } from 'https://unpkg.com/@harnessio/ff-javascript-cl
 
 
 var target = getTarget()
-var menuStyle = ''
+var menuStyle = 'menu'
 var menuSelectedStyle= 'w3-blue'
 var firstStart = true
 var currentContent
 var MenuVersion = "v1"
 
 const cf = initialize(
-    '44e3ffcb-3a5e-4af1-a7f3-ba7a51cbc74b',
+    'd1f15499-849d-4d8c-9db8-b615dbd7844c',
     target
 );
 
