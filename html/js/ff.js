@@ -160,6 +160,18 @@ function HalloweenSongEnabled(flag) {
 		}
 	}
 }
+
+function Home_RegionMAP(flag) {
+		var map = $("body").find("#regionMap");
+		if(flag == 'true'){
+			console.log("Map Enabled")
+			map.attr("style","display: visibility;");
+		}else{
+			map.attr("style","display: none;");
+			console.log("Map Disabled")
+		}
+}
+
 function HalloweenJack(flag) {
 		var jack = $("body").find(".halloween");
 		if(flag == 'true'){
@@ -169,6 +181,8 @@ function HalloweenJack(flag) {
 			jack.attr("style","display: none;");
 		}
 }
+
+
 function Halloween(flag) {
 
 	var halloweenElement = $("body").find("#Halloween");
@@ -356,6 +370,9 @@ function ALL_ALERT_MODAL(flag) {
         }
    }
 
+function closeMessage() {
+	youtubeStatus == 'off';
+}
 
 }
 function ALL_YOUTUBE_MODAL(flag) {

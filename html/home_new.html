@@ -245,7 +245,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
                 </div>
             </section>
             <!-- Banner ---->
-            <div class="w3-third">
+            <div id="regionMap" class="w3-third">
                 <h5>Regions</h5>
                 <img src="./images/region.jpeg" style="width:100%" alt="Google Regional Map">
             </div>
@@ -517,6 +517,24 @@ function w3_close() {
 <!-- Modal ---->
 
 <!-- Alert Modal HTML -->
+<!--<div id="myModal" class="modal fade">-->
+<!--    <div class="modal-dialog modal-confirm">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <div class="icon-box">-->
+<!--                    <em id="iconModal" class="material-icons">&#xE876;</em> &lt;!&ndash; &#xE5CD;  Error&ndash;&gt;-->
+<!--                </div>-->
+<!--                <h4 id="modalTitle" class="modal-title w-100">Awesome!</h4>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <p id="ModalMessage" class="text-center">Your Premium Trial will expire soon, click here to choose a package plan.</p>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <div id="myModal" class="modal fade">
     <div class="modal-dialog modal-confirm">
         <div class="modal-content">
@@ -526,11 +544,12 @@ function w3_close() {
                 </div>
                 <h4 id="modalTitle" class="modal-title w-100">Awesome!</h4>
             </div>
-            <div class="modal-body">
+            <div id="ModalMessageBody" class="modal-body">
                 <p id="ModalMessage" class="text-center">Your Premium Trial will expire soon, click here to choose a package plan.</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+                <button id="btnModalOk" onclick="closeMessage()" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+
             </div>
         </div>
     </div>

@@ -3,6 +3,19 @@
   --modal-roll-color: #6fb32b;
 }
 
+.videoInsert {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    min-width: 10%;
+    min-height: 10%;
+    width: 100%;
+    height: auto;
+
+    background-size: cover;
+    overflow: hidden;
+}
+
 .modal-confirm {
 	color: #636363;
 	width: 325px;
