@@ -51,7 +51,7 @@ animation: scroll var(--duration) linear var(--delay) var(--iteration-count);
 animation-play-state: var(--play);
 animation-delay: var(--delay);
 animation-direction: var(--direction);
-background-color: #228B22!important;
+background-color: #222!important;
 }
 @keyframes scroll {
 0% {
