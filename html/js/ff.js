@@ -13,6 +13,7 @@ const cf = initialize(
     target
 );
 
+
 function defineTargetObject(id,name,company,email){
     var targetObj
     let platform = navigator?.userAgentData?.platform || navigator?.platform || 'unknown'
