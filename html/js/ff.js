@@ -189,6 +189,7 @@ function Halloween(flag) {
 
 	HalloweenMode = flag;
 	console.log("Halloween: "+flag)
+	if (window.location.href.indexOf("payments.html") == -1) {
 	if (maintenanceMode == false){
 		if ( HalloweenMode == 'true'){
 			console.log("Setting Halloween: "+flag)
@@ -205,6 +206,7 @@ function Halloween(flag) {
 		});
 			halloweenElement.attr("style","display: none;");
 		}
+	}
 	}
 
 }

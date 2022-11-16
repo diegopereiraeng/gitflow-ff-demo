@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Harness Payments</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js' crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js' crossorigin='anonymous'></script>
+    <script type="module" src="./js/ff.js"></script>
+    <script  src="./js/payments.js"></script>
+    <!-- Appdynamics -->
+    <script src="./js/appdynamics.js" charset="UTF-8" type="text/javascript"></script>
+    <script src="//cdn.appdynamics.com/adrum/adrum-21.4.0.3405.js"></script>
+    <!-- Banner Harness Customers -->
+    <link rel="icon" href="./favicon.ico">
+    <link href="./css/payments.css" type="text/css" rel="stylesheet"/>
+    <link href="./css/complete.css" type="text/css" rel="stylesheet"/>
+    <link href="./css/failed.css" type="text/css" rel="stylesheet"/>
+    <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" type="text/css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body id="payments">
+    <div class="container p-0" id="invoice">
+        <div class="card px-4">
+            <p class="h8 py-3">Invoice Payment</p>
+            <div class="row gx-3">
+                <div class="col-12">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">Please insert your Invoice ID</p>
+                        <input class="form-control mb-3" type="text" placeholder="EX: 543219876" value="">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="btn btn-primary mb-3" onclick="showInvoice();">
+                        <span class="ps-3">Search Invoice</span>
+                        <span class="fas fa-arrow-right"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-0" id="invoiceDetail" style="display:none;">
+        <div class="col-12 px-4 card">
+            <p class="h8 py-3">Invoice Detail</p>
+            <div class="d-flex align-items-end mt-4 mb-2">
+                <p class="h4 m-0"><span class="pe-1">ID:</span><span
+                        class="pe-1">543219876</span></p>
+
+            </div>
+
+            <div class="d-flex justify-content-between mb-2">
+                <p class="textmuted">Subtotal</p>
+                <p class="fs-14 fw-bold"><span class="fas fa-dollar-sign pe-1"></span>1,450</p>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <p class="textmuted">Shipping</p>
+                <p class="fs-14 fw-bold">Free</p>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <p class="textmuted">Promo code</p>
+                <p class="fs-14 fw-bold">-<span class="fas fa-dollar-sign px-1"></span>100</p>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <p class="textmuted fw-bold">Total</p>
+                <div class="d-flex align-text-top ">
+                    <span class="fas fa-dollar-sign mt-1 pe-1 fs-14 "></span><span class="h4">1,350</span>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="btn btn-primary mb-3" onclick="showPayment();">
+                    <span class="ps-3">Pay Invoice</span>
+                    <span class="fas fa-arrow-right"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container p-0" id="payment" style="display:none;">
+        <div class="card px-4">
+            <p class="h8 py-3">Payment Details</p>
+            <div class="row gx-3">
+                <div class="col-12">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">Person Name</p>
+                        <input class="form-control mb-3" type="text" placeholder="Name" value="Diego Pereira">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">Card Number</p>
+                        <input class="form-control mb-3" type="text" placeholder="1234 5678 435678">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">Expiry</p>
+                        <input class="form-control mb-3" type="text" placeholder="MM/YYYY">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">CVV/CVC</p>
+                        <input class="form-control mb-3 pt-2 " type="password" placeholder="***">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="btn btn-primary mb-3" onclick="payInvoice();">
+                        <span class="ps-3">Pay $1,350</span>
+                        <span class="fas fa-arrow-right"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-0 loader" id="paymentProcess" style="display:none;">
+        <p class="h8 py-3">Processing your payment, please wait...</p>
+
+        <div class="loader__image" id="loader_image">
+                <div class="loader__coin" id="flip_image">
+                    <img src="./images/loader-coin.png" alt="">
+                </div>
+                <div class="loader__hand">
+                    <img src="./images/loader-hand.png" alt="">
+                </div>
+            </div>
+
+    </div>
+    <div class="container p-0" id="complete" style="display:none;">
+            <p class="h8 py-3" id="accepted">Payment Accepted</p>
+            <div class="wrapper" id="wrapper" >
+
+                <svg width="490px" height="351px" viewBox="0 0 390 251" xmlns="http://www.w3.org/2000/svg" class="animate">
+                    <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
+                        <rect class="animate-right-to-left" x="102" y="129" width="288" height="31" rx="15.5"/>
+                        <rect class="animate-left-to-right" fill="#F6F8F7" x="9" y="158" width="288" height="31" rx="15.5"/>
+                        <rect class="animate-right-to-left" fill="#F6F8F7" x="49" y="182" width="288" height="31" rx="15.5"/>
+                        <rect class="animate-left-to-right" fill="#F6F8F7" x="13" y="210" width="288" height="31" rx="15.5"/>
+                        <rect class="animate-left-to-right" fill="#F6F8F7" y="49" width="288" height="31" rx="15.5"/>
+                        <rect class="animate-right-to-left" fill="#F6F8F7" x="42" y="74" width="288" height="31" rx="15.5"/>
+                        <rect class="animate-right-to-left" fill="#F6F8F7" x="53" y="18" width="288" height="31" rx="15.5"/>
+                        <rect class="animate-left-to-right" fill="#F6F8F7" x="61" y="105" width="288" height="31" rx="15.5"/>
+                        <path class="animate-wow" d="M183 45c-46.316 0-84 37.68-84 84s37.684 84 84 84 84-37.68 84-84-37.684-84-84-84zm46.83 55.986l-51.692 58.154a6.452 6.452 0 0 1-4.834 2.168 6.456 6.456 0 0 1-4.035-1.415l-32.307-25.847a6.462 6.462 0 0 1-1.008-9.081 6.46 6.46 0 0 1 9.081-1.011l27.517 22.01 47.618-53.569c2.365-2.668 6.455-2.907 9.12-.536a6.466 6.466 0 0 1 .54 9.127z" fill-rule="nonzero" fill="#4CD964"/>
+                        <circle stroke="#009C1B" cx="302" cy="45" r="9"/>
+                        <circle stroke="#009C1B" cx="144" cy="9" r="9"/>
+                        <circle fill="#009C1B" cx="311" cy="138" r="9"/>
+                        <circle stroke="#009C1B" cx="273" cy="240" r="9"/>
+                        <circle fill="#009C1B" cx="100" cy="240" r="9"/>
+                        <circle fill="#009C1B" cx="54" cy="105" r="9"/>
+                        <path d="M263.023 7.744h-6.767V.977c0-.309-.419-.977-1.256-.977s-1.256.668-1.256.977v6.767h-6.767c-.309 0-.977.419-.977 1.256s.668 1.256.977 1.256h6.767v6.767c0 .308.419.977 1.256.977s1.256-.669 1.256-.977v-6.767h6.767c.308 0 .977-.419.977-1.256s-.669-1.256-.977-1.256z" fill="#009C1B" fill-rule="nonzero"/>
+                    </g>
+                </svg>
+            </div>
+    </div>
+
+    <div class="container p-0" id="failed" style="display:none;">
+        <div id="failedMessage">
+            <p class="h8 py-3" id="errorTitle">Payment declined!</p>
+            <p class="h8 py-3" id="errorContent">Error</p>
+        </div>
+        <div id="failedAnimation">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 72 72" style="enable-background:new 0 0 72 72;" xml:space="preserve">
+                <style type="text/css">
+                    .circle-fill{fill:#DE524C;}
+                  .circle-stroke{fill:none;stroke:#DE524C;stroke-width:5;stroke-miterlimit:10;}
+                    .cross{fill:none;stroke:#FFFFFF;stroke-width:5;stroke-linecap:round;stroke-miterlimit:10;}
+                </style>
+                    <g>
+                <circle class="circle-stroke" cx="36" cy="36" r="32"/>
+                        <circle class="circle-fill" cx="36" cy="36" r="32"/>
+                </g>
+
+                        <g>
+                    <line class="cross" x1="27.4" y1="44.6" x2="44.6" y2="27.4"/>
+                            <line class="cross" x1="27.4" y1="27.4" x2="44.6" y2="44.6"/>
+                </g>
+
+            </svg>
+        </div>
+    </div>
+
+
+
+
+</body>

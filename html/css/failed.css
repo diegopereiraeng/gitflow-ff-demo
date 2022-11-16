@@ -1,0 +1,80 @@
+svg{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 148px;
+}
+
+@keyframes bg-animation {
+  0%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+  }
+}
+
+
+
+.circle-stroke {
+  opacity:0;
+  stroke-dasharray: 210;
+  stroke-dashoffset: 0;
+  animation: 1.5s stroke-animation forwards;
+  animation-delay: 0.8s;
+}
+
+@keyframes stroke-animation {
+  0%{
+    opacity:0;
+    stroke-dashoffset: 210;
+  }
+  100%{
+    opacity:1;
+    stroke-dashoffset: 0;
+  }
+}
+
+.circle-fill {
+  opacity:0;
+  animation: 3s fill-animation forwards;
+  animation-delay: 1s;
+}
+
+@keyframes fill-animation {
+  0%{
+    opacity:0;
+  }
+  80%{
+    opacity:1;
+  }
+  100%{
+    opacity:1;
+  }
+}
+
+.cross {
+  opacity:1;
+  stroke-dasharray: 180;
+  stroke-dashoffset: 180;
+  animation: 2s cross-animation forwards;
+  animation-delay: 2s;
+}
+
+@keyframes cross-animation {
+  0%{
+    stroke-dashoffset: 180;
+  }
+  100%{
+    stroke-dashoffset: 0;
+  }
+}
+
+#errorContent, #errorTitle {
+  position: relative;
+  top: -150px;
+}
+
