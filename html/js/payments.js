@@ -80,7 +80,7 @@ function payInvoice(){
 			}
 			else{
 				paymentFailedElement.attr("style","display: visibility;");
-           		errorContentElement.text(data.responseText);
+				errorContentElement.text(data.responseText);
 			}
 			console.log(data.responseText);
 
