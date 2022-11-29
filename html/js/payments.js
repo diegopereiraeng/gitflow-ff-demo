@@ -58,7 +58,7 @@ function payInvoice(){
 	console.log(path.split('/')[1])
 	console.log(window.location.host)
 	if((window.location.host).startsWith({ toString: () => "localhost" })){
-    	userPath = "diegopereiraeng"
+        userPath = "diegopereiraeng"
     }
 
 	var validationAddress = "http://payments-validation.harness-demo.site/"+userPath+"/validation"
@@ -66,9 +66,8 @@ function payInvoice(){
 	console.log(validationAddress)
 
 
-
 	$.ajax({
-        url: 'http://34.67.168.73:8082/v1/payments/process?value=1350&validationPath='+userPath,
+        url: 'http://payments.harness-demo.site/v1/payments/process?value=1350&validationPath='+userPath,
         type: 'GET',
         success: function(data){
             var paymentProcessElement = $("body").find("#paymentProcess");
