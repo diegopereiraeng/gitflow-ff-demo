@@ -51,9 +51,24 @@ function payInvoice(){
 //    jqxhr.always(function() {
 //      alert( "second complete" );
 //    });
+	console.log("Getting Path name:")
+	var path = window.location.pathname
+
+	var userPath = path.split('/')[1]
+	console.log(path.split('/')[1])
+	console.log(window.location.host)
+	if((window.location.host).startsWith({ toString: () => "localhost" })){
+    	userPath = "diegopereiraeng"
+    }
+
+	var validationAddress = "http://payments-validation.harness-demo.site/"+userPath+"/validation"
+	console.log("Validation Address: ")
+	console.log(validationAddress)
+
+
 
 	$.ajax({
-        url: 'http://34.67.168.73:8082/v1/payments/process?value=1350',
+        url: 'http://34.67.168.73:8082/v1/payments/process?value=1350&validationPath='+userPath,
         type: 'GET',
         success: function(data){
             var paymentProcessElement = $("body").find("#paymentProcess");
