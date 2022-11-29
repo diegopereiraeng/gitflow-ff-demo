@@ -67,7 +67,7 @@ function payInvoice(){
 
 
 	$.ajax({
-        url: 'http://payments.harness-demo.site/v1/payments/process?value=1350&validationPath='+userPath,
+        url: 'http://payments.harness-demo.site:8082/v1/payments/process?value=1350&validationPath='+userPath,
         type: 'GET',
         success: function(data){
             var paymentProcessElement = $("body").find("#paymentProcess");
