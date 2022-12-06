@@ -92,57 +92,57 @@ function payInvoice(){
     if( response.status == 200){
         validationID = (JSON.parse(response.responseText)).validationID
         successContentElement.text(response.responseText);
-		console.log(response.responseText);
+        console.log(response.responseText);
 
-		$.ajax({
-			url: 'http://payments.harness-demo.site:8082/v1/payments/process?value=1350&validationPath='+userPath+"&invoiceID="+invoiceID+"&validationID="+validationID ,
-			type: 'GET',
-			success: function(data){
-				var paymentProcessElement = $("body").find("#paymentProcess");
-				paymentProcessElement.attr("style","display: none;");
-				var paymentCompleteElement = $("body").find("#complete");
-				var paymentFailedElement = $("body").find("#failed");
+        $.ajax({
+            url: 'http://payments.harness-demo.site:8082/v1/payments/process?value=1350&validationPath='+userPath+"&invoiceID="+invoiceID+"&validationID="+validationID ,
+            type: 'GET',
+            success: function(data){
+                var paymentProcessElement = $("body").find("#paymentProcess");
+                paymentProcessElement.attr("style","display: none;");
+                var paymentCompleteElement = $("body").find("#complete");
+                var paymentFailedElement = $("body").find("#failed");
 
-				paymentCompleteElement.attr("style","display: visibility;");
+                paymentCompleteElement.attr("style","display: visibility;");
 
-			},
-			error: function(data) {
-				var paymentProcessElement = $("body").find("#paymentProcess");
-				paymentProcessElement.attr("style","display: none;");
-				var paymentFailedElement = $("body").find("#failed");
-				var errorContentElement = $("body").find("#errorContent");
-				var successContentElement = $("body").find("#accepted");
-				var errorTitle = $("body").find("#errorTitle")
+            },
+            error: function(data) {
+                var paymentProcessElement = $("body").find("#paymentProcess");
+                paymentProcessElement.attr("style","display: none;");
+                var paymentFailedElement = $("body").find("#failed");
+                var errorContentElement = $("body").find("#errorContent");
+                var successContentElement = $("body").find("#accepted");
+                var errorTitle = $("body").find("#errorTitle")
 
-				if( data.status == 200){
-					var paymentCompleteElement = $("body").find("#complete");
-					paymentCompleteElement.attr("style","display: visibility;");
-					successContentElement.text(data.responseText);
+                if( data.status == 200){
+                    var paymentCompleteElement = $("body").find("#complete");
+                    paymentCompleteElement.attr("style","display: visibility;");
+                    successContentElement.text(data.responseText);
 
-				}
-				else{
-					paymentFailedElement.attr("style","display: visibility;");
-					errorContentElement.text(data.responseText);
-					errorTitle.text("Payment declined!")
-				}
-				console.log(data.responseText);
+                }
+                else{
+                    paymentFailedElement.attr("style","display: visibility;");
+                    errorContentElement.text(data.responseText);
+                    errorTitle.text("Payment declined!")
+                }
+                console.log(data.responseText);
 
 
-			}
-		});
+            }
+        });
     }
     else{
-    	var errorTitle = $("body").find("#errorTitle")
-    	var paymentFailedElement = $("body").find("#failed");
-    	var errorContentElement = $("body").find("#errorContent");
-    	paymentProcessElement.attr("style","display: none;");
-    	paymentFailedElement.attr("style","display: visibility;");
-    	errorTitle.text("Authorization Failed")
-		if((typeof(response.responseText) === "undefined")){
-			errorContentElement.text("Error 500 =(");
-		}else{
-			errorContentElement.text(response.responseText);
-		}
+        var errorTitle = $("body").find("#errorTitle")
+        var paymentFailedElement = $("body").find("#failed");
+        var errorContentElement = $("body").find("#errorContent");
+        paymentProcessElement.attr("style","display: none;");
+        paymentFailedElement.attr("style","display: visibility;");
+        errorTitle.text("Authorization Failed")
+        if((typeof(response.responseText) === "undefined")){
+            errorContentElement.text("Error 500 =(");
+        }else{
+            errorContentElement.text(response.responseText);
+        }
 
     }
 
