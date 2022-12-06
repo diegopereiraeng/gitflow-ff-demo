@@ -15,31 +15,31 @@ const cf = initialize(
 );
 
 function getLocation() {
-		var data
-		var userLocation
+        var data
+        var userLocation
 
-		if((typeof(window.localStorage.userLocation) === "undefined")) {
-			data = $.ajax({
-            			url: 'http://ip-api.com/json',
-            			type: 'GET',
-            			async: false
-            		});
-			if( data.status == 200){
-				window.localStorage.setItem('userLocation', data.responseText )
-				userLocation = JSON.parse(window.localStorage.userLocation)
-				//window.localStorage.setItem('userLocation', JSON.stringify(data) )
-				console.log(userLocation)
+        if((typeof(window.localStorage.userLocation) === "undefined")) {
+            data = $.ajax({
+                        url: 'http://ip-api.com/json',
+                        type: 'GET',
+                        async: false
+                    });
+            if( data.status == 200){
+                window.localStorage.setItem('userLocation', data.responseText )
+                userLocation = JSON.parse(window.localStorage.userLocation)
+                //window.localStorage.setItem('userLocation', JSON.stringify(data) )
+                console.log(userLocation)
 
-			}
-			else{
-				userLocation = JSON.parse('{"status":"failed","country":"Unknown","countryCode":"Unknown","region":"Unknown","regionName":"Unknown","city":"Unknown","zip":"Unknown","lat":-37.8281,"lon":-49.4393,"timezone":"Unknown","isp":"Unknown","org":"Unknown","as":"Unknown","query":"Unknown"}')
-				console.log("Failure to get user location")
-			}
-			console.log(data.responseText);
-		} else {
-			userLocation = JSON.parse(window.localStorage.userLocation)
-			console.log("Location is not null");
-		}
+            }
+            else{
+                userLocation = JSON.parse('{"status":"failed","country":"Unknown","countryCode":"Unknown","region":"Unknown","regionName":"Unknown","city":"Unknown","zip":"Unknown","lat":-37.8281,"lon":-49.4393,"timezone":"Unknown","isp":"Unknown","org":"Unknown","as":"Unknown","query":"Unknown"}')
+                console.log("Failure to get user location")
+            }
+            console.log(data.responseText);
+        } else {
+            userLocation = JSON.parse(window.localStorage.userLocation)
+            console.log("Location is not null");
+        }
 
 
         return userLocation;
@@ -67,7 +67,7 @@ function defineTargetObject(id,name,company,email){
 }
 
 function defineTargetObjectPlus(id,name,company,email,userLocation){
-	console.log("user Location: "+userLocation)
+    console.log("user Location: "+userLocation)
     var targetObj
     let platform = navigator?.userAgentData?.platform || navigator?.platform || 'unknown'
     targetObj = {
@@ -81,11 +81,11 @@ function defineTargetObjectPlus(id,name,company,email,userLocation){
             platform: platform,
             mobile: navigator?.userAgentData?.mobile || navigator?.mobile || 'unknown' ,
             language: navigator.language,
-			country: userLocation.country,
-			regionName: userLocation.regionName,
-			city: userLocation.city,
-			isp: userLocation.isp,
-			org: (userLocation.org) //.replace(/[^a-zA-Z0-9 ]/g, '')
+            country: userLocation.country,
+            regionName: userLocation.regionName,
+            city: userLocation.city,
+            isp: userLocation.isp,
+            org: (userLocation.org) //.replace(/[^a-zA-Z0-9 ]/g, '')
 
         }
     }
@@ -163,22 +163,22 @@ return arr[Math.floor(Math.random() * arr.length)];}
 var lock = false
 var lockSong = false
 $( function() {
-	$( "#draggable" ).draggable();
-	$('#draggable').click(function(){
-	if (!lock){
-		lock = true
-		$(".speech-bubble").css("visibility", "visible");
-		$(".speech-bubble").text(randomWord(jackWords));
-		setTimeout(() => {  $(".speech-bubble").css("visibility", "hidden");lock = false; }, 2000);
-	}else{
-		console.log("Ouch")
-	}
-	if (lockSong == false){
-		lockSong = true
-		var audio = new Audio('./songs/HalloweenThemeSong.mp3');
-		audio.play();
-		setTimeout(() => {  audio.pause();lockSong = false;}, 25000);
-	}
+    $( "#draggable" ).draggable();
+    $('#draggable').click(function(){
+    if (!lock){
+        lock = true
+        $(".speech-bubble").css("visibility", "visible");
+        $(".speech-bubble").text(randomWord(jackWords));
+        setTimeout(() => {  $(".speech-bubble").css("visibility", "hidden");lock = false; }, 2000);
+    }else{
+        console.log("Ouch")
+    }
+    if (lockSong == false){
+        lockSong = true
+        var audio = new Audio('./songs/HalloweenThemeSong.mp3');
+        audio.play();
+        setTimeout(() => {  audio.pause();lockSong = false;}, 25000);
+    }
 }
 )
 } );
@@ -190,87 +190,87 @@ var qr_code_status = "false"
 $(document).ready(function() {
 
   $("#qrButton").click(function () {
-	if (qr_code_status == "true"){
-		$("#mpo-modal-controller").show();
-	}else
-	{
-		$("#mpo-modal-controller").hide();
-	}
+    if (qr_code_status == "true"){
+        $("#mpo-modal-controller").show();
+    }else
+    {
+        $("#mpo-modal-controller").hide();
+    }
   });
 
 });
 
 function QRCODE(flag){
-	console.log("Checking QRCODE Flag")
-	console.log("Current URL: "+window.location.href)
+    console.log("Checking QRCODE Flag")
+    console.log("Current URL: "+window.location.href)
 
-	if(flag != qr_code_status)
-	{
-		$("body").find("#qrButton").click();
-		qr_code_status = flag
-	}
+    if(flag != qr_code_status)
+    {
+        $("body").find("#qrButton").click();
+        qr_code_status = flag
+    }
 
 }
 
 function HalloweenSongEnabled(flag) {
-	if (ready) {
-		var halloweenSongElement = document.getElementById('HalloweenTheme');
-		if(flag == 'true'){
-			console.log("Halloween Theme")
-			halloweenSongElement.play();
-		}else{
-			halloweenSongElement.pause();
-		}
-	}
+    if (ready) {
+        var halloweenSongElement = document.getElementById('HalloweenTheme');
+        if(flag == 'true'){
+            console.log("Halloween Theme")
+            halloweenSongElement.play();
+        }else{
+            halloweenSongElement.pause();
+        }
+    }
 }
 
 function Home_RegionMAP(flag) {
-		var map = $("body").find("#regionMap");
-		if(flag == 'true'){
-			console.log("Map Enabled")
-			map.attr("style","display: visibility;");
-		}else{
-			map.attr("style","display: none;");
-			console.log("Map Disabled")
-		}
+        var map = $("body").find("#regionMap");
+        if(flag == 'true'){
+            console.log("Map Enabled")
+            map.attr("style","display: visibility;");
+        }else{
+            map.attr("style","display: none;");
+            console.log("Map Disabled")
+        }
 }
 
 function HalloweenJack(flag) {
-		var jack = $("body").find(".halloween");
-		if(flag == 'true'){
-			console.log("JAck In dA HouSe")
-			jack.attr("style","display: visibility;");
-		}else{
-			jack.attr("style","display: none;");
-		}
+        var jack = $("body").find(".halloween");
+        if(flag == 'true'){
+            console.log("JAck In dA HouSe")
+            jack.attr("style","display: visibility;");
+        }else{
+            jack.attr("style","display: none;");
+        }
 }
 
 
 function Halloween(flag) {
 
-	var halloweenElement = $("body").find("#Halloween");
+    var halloweenElement = $("body").find("#Halloween");
 
-	HalloweenMode = flag;
-	console.log("Halloween: "+flag)
-	if (window.location.href.indexOf("payments.html") == -1) {
-	if (maintenanceMode == false){
-		if ( HalloweenMode == 'true'){
-			console.log("Setting Halloween: "+flag)
-			halloweenElement.attr("style","display: visibility;");
+    HalloweenMode = flag;
+    console.log("Halloween: "+flag)
+    if (window.location.href.indexOf("payments.html") == -1) {
+    if (maintenanceMode == false){
+        if ( HalloweenMode == 'true'){
+            console.log("Setting Halloween: "+flag)
+            halloweenElement.attr("style","display: visibility;");
 
-			$( 'body' ).each(function () {
-					backgroundBackup =$(".bg-demo-ff").css('backgroundColor');
+            $( 'body' ).each(function () {
+                    backgroundBackup =$(".bg-demo-ff").css('backgroundColor');
                     this.style.setProperty( 'background-color', '#512888', 'important' );
                 });
-		}
-		else{
-		$( '.bg-demo-ff' ).each(function () {
-			this.style.setProperty( 'background-color', backgroundBackup, 'important' );
-		});
-			halloweenElement.attr("style","display: none;");
-		}
-	}
-	}
+        }
+        else{
+        $( '.bg-demo-ff' ).each(function () {
+            this.style.setProperty( 'background-color', backgroundBackup, 'important' );
+        });
+            halloweenElement.attr("style","display: none;");
+        }
+    }
+    }
 
 }
 
@@ -302,7 +302,7 @@ function BackendAPI(flag){
 }
 
 function Customer_Mode(flag){
-	console.log("Customer Mode = "+flag)
+    console.log("Customer Mode = "+flag)
     if (flag == 'true') {
         window.localStorage.setItem('harnessCustomer', 'true' )
         menuStyle = 'new_menu'
@@ -312,13 +312,13 @@ function Customer_Mode(flag){
         menuStyle = 'menu'
     }
     if (MenuVersion == "v1") {
-		if (window.location.href.indexOf("home_new.html") > -1 ) {
-			checkMenu();
-		}
-	}
-	else if (MenuVersion == "v2") {
-		checkMenuV2();
-	}
+        if (window.location.href.indexOf("home_new.html") > -1 ) {
+            checkMenu();
+        }
+    }
+    else if (MenuVersion == "v2") {
+        checkMenuV2();
+    }
 }
 
 function Home_Menu_Dashboard_Selection_Color(flag) {
@@ -347,15 +347,15 @@ function TestRealTime(){
 }
 
 function Guest_Mode(flag) {
-	console.log("Guest Mode: "+flag)
+    console.log("Guest Mode: "+flag)
 }
 
 function Home_Menu_New(flag){
     if (menuStyle == 'new_menu') {
-		console.log("New Menu = true")
-	}else{
-		console.log("New Menu = false")
-	}
+        console.log("New Menu = true")
+    }else{
+        console.log("New Menu = false")
+    }
     
 }
 
@@ -436,7 +436,7 @@ function ALL_ALERT_MODAL(flag) {
    }
 
 function closeMessage() {
-	youtubeStatus == 'off';
+    youtubeStatus == 'off';
 }
 
 }
@@ -520,61 +520,61 @@ function Home_CKO(flag) {
 
 function Home_Maintenance(maintenance) {
 
-	var siteElement = $("body").find(".site");
-	var halloweenElement = $("body").find("#Halloween");
-	var harnessElement = $("body").find("#Harness");
-	var maintenanceElement = $("body").find("#maintenance");
-	console.log("Maintenance: "+maintenance)
+    var siteElement = $("body").find(".site");
+    var halloweenElement = $("body").find("#Halloween");
+    var harnessElement = $("body").find("#Harness");
+    var maintenanceElement = $("body").find("#maintenance");
+    console.log("Maintenance: "+maintenance)
 
-	if ( maintenance == 'true'){
-		maintenanceMode = true
-		console.log("Setting Maintenance: "+maintenance)
-		siteElement.attr("style","display: none;");
-		halloweenElement.attr("style","display: none;");
-		harnessElement.attr("style","display: none;");
-		maintenanceElement.attr("style","display: visibility;");
-		$("body").find("#scrolling-partners-section").attr("style","display: none;");
-	}
-	else{
-		maintenanceMode = false
-		switch(siteMode){
-			case "Site":
-				siteElement.attr("style","display: visibility;");
-				break;
-			case "Harness":
-				harnessElement.attr("style","display: visibility;");
-				break;
-			}
+    if ( maintenance == 'true'){
+        maintenanceMode = true
+        console.log("Setting Maintenance: "+maintenance)
+        siteElement.attr("style","display: none;");
+        halloweenElement.attr("style","display: none;");
+        harnessElement.attr("style","display: none;");
+        maintenanceElement.attr("style","display: visibility;");
+        $("body").find("#scrolling-partners-section").attr("style","display: none;");
+    }
+    else{
+        maintenanceMode = false
+        switch(siteMode){
+            case "Site":
+                siteElement.attr("style","display: visibility;");
+                break;
+            case "Harness":
+                harnessElement.attr("style","display: visibility;");
+                break;
+            }
 
-		if (HalloweenMode == true ){
-			halloweenElement.attr("style","display: visibility;");
-		}
-		if (Banner == true ){
-			$("body").find("#scrolling-partners-section").attr("style","display: visibility;");
-		}
-		maintenanceElement.attr("style","display: none;");
-	}
+        if (HalloweenMode == true ){
+            halloweenElement.attr("style","display: visibility;");
+        }
+        if (Banner == true ){
+            $("body").find("#scrolling-partners-section").attr("style","display: visibility;");
+        }
+        maintenanceElement.attr("style","display: none;");
+    }
 
 }
 function Menu_Version(flag) {
-	MenuVersion = flag;
-	if (MenuVersion == "v1") {
-		if (window.location.href.indexOf("home_new.html") > -1 ) {
-			checkMenu();
-		}
-	}
-	else if (MenuVersion == "v2") {
-		checkMenuV2();
-	}
+    MenuVersion = flag;
+    if (MenuVersion == "v1") {
+        if (window.location.href.indexOf("home_new.html") > -1 ) {
+            checkMenu();
+        }
+    }
+    else if (MenuVersion == "v2") {
+        checkMenuV2();
+    }
 }
 
 function Home_Menu(flag) {
-	if (MenuVersion == "v1") {
-		if (window.location.href.indexOf("home_new.html") > -1 ) {
-			checkMenu();
-		}
-	}
-	else if (MenuVersion == "v2") {
+    if (MenuVersion == "v1") {
+        if (window.location.href.indexOf("home_new.html") > -1 ) {
+            checkMenu();
+        }
+    }
+    else if (MenuVersion == "v2") {
         checkMenuV2();
     }
 }
@@ -600,32 +600,32 @@ function checkMenu(){
     var iconclass
 
 
-	console.log("Checking Menu...");
-	console.log("Applying Menu " + MenuVersion);
-	if (MenuVersion == "v1") {
-		if (window.location.href.indexOf("home_new.html") > -1 ) {
-			var sideBarElement = $("body").find("#mySidebar");
-			var avatarDivElement = $("body").find("#avatarDiv");
-			var menuTitleElement = $("body").find("#menuTitle");
+    console.log("Checking Menu...");
+    console.log("Applying Menu " + MenuVersion);
+    if (MenuVersion == "v1") {
+        if (window.location.href.indexOf("home_new.html") > -1 ) {
+            var sideBarElement = $("body").find("#mySidebar");
+            var avatarDivElement = $("body").find("#avatarDiv");
+            var menuTitleElement = $("body").find("#menuTitle");
 
-			var pageContentElement = $("body").find("#mainPageContent");
-			var homeContentElement = $("body").find("#homeContent");
+            var pageContentElement = $("body").find("#mainPageContent");
+            var homeContentElement = $("body").find("#homeContent");
 
-			//pageContentElement.removeAttr("style");
-			pageContentElement.attr("style","margin-left:275px;margin-top:3px;");
-			homeContentElement.attr("style","margin-left:275px;margin-top:3px;");
+            //pageContentElement.removeAttr("style");
+            pageContentElement.attr("style","margin-left:275px;margin-top:3px;");
+            homeContentElement.attr("style","margin-left:275px;margin-top:3px;");
 
-			//sideBarElement.removeAttr("style");
-			sideBarElement.attr("style","z-index:3;width:275px;");
+            //sideBarElement.removeAttr("style");
+            sideBarElement.attr("style","z-index:3;width:275px;");
 
-			avatarDivElement.attr("style","display: visibility;");
-			menuTitleElement.attr("style","display: visibility;");
+            avatarDivElement.attr("style","display: visibility;");
+            menuTitleElement.attr("style","display: visibility;");
 
-			checkSiteColor();
+            checkSiteColor();
 
 
-		}
-	}
+        }
+    }
 
 
     if (menuStyle == 'menu' && window.location.href.indexOf("home_new.html") > -1) {
@@ -745,147 +745,147 @@ function checkMenu(){
 }
 
 function checkMenuV2(flag){
-	var menu
-	var paddingClass
-	var iconclass
+    var menu
+    var paddingClass
+    var iconclass
 
-	var sideBarElement = $("body").find("#mySidebar");
-	var burgerElement = $("body").find("#hr");
-	var avatarDivElement = $("body").find("#avatarDiv");
-	var menuTitleElement = $("body").find("#menuTitle");
+    var sideBarElement = $("body").find("#mySidebar");
+    var burgerElement = $("body").find("#hr");
+    var avatarDivElement = $("body").find("#avatarDiv");
+    var menuTitleElement = $("body").find("#menuTitle");
     menuTitleElement.attr("style","display: none;");
 
-	var pageContentElement = $("body").find("#mainPageContent");
-	var homeContentElement = $("body").find("#homeContent");
+    var pageContentElement = $("body").find("#mainPageContent");
+    var homeContentElement = $("body").find("#homeContent");
 
-	//pageContentElement.removeAttr("style");
+    //pageContentElement.removeAttr("style");
 
-	//navBarElement.attr("style","margin-left:55px;margin-top:8px;");
-	pageContentElement.attr("style","margin-left:55px;margin-top:3px;");
-	homeContentElement.attr("style","margin-left:55px;margin-top:3px;");
-	//sideBarElement.removeAttr("style");
-	sideBarElement.attr("style","z-index:3;width:60px;margin-top:110px;");
-	burgerElement.remove()
+    //navBarElement.attr("style","margin-left:55px;margin-top:8px;");
+    pageContentElement.attr("style","margin-left:55px;margin-top:3px;");
+    homeContentElement.attr("style","margin-left:55px;margin-top:3px;");
+    //sideBarElement.removeAttr("style");
+    sideBarElement.attr("style","z-index:3;width:60px;margin-top:110px;");
+    burgerElement.remove()
 
-	checkSiteColor();
-
-
-	avatarDivElement.attr("style","display: none;");
-	menuTitleElement.attr("style","display: none;");
-
-	if (menuStyle == 'menu' && window.location.href.indexOf("home_new.html") > -1) {
-		menu = JSON.parse(cf.variation('Home_Menu', '[    { "type": "fa-users", "name": "Sign in" },   { "type": "fa-eye", "name": "Sign up" },   { "type": "fa-users", "name": "Harness" } ]'))
-		paddingClass = "w3-padding"
-		iconclass = ""
-	}else{
-		menu = JSON.parse(cf.variation('Home_Menu_New', '[    { "type": "fa-users", "name": "Sign in" },   { "type": "fa-eye", "name": "Sign up" },   { "type": "fa-users", "name": "Harness" } ]'))
-		paddingClass = "w3-padding-small"
-		iconclass = "w3-medium"
-	}
-	console.log("Menu Style: "+JSON.stringify(menuStyle));
-	console.log("Menu: "+JSON.stringify(menu));
-	// Bloco Menu
-	$("body").find(".w3-bar-block").remove();
-	var newBlock = $("<div />", {
-		class: "w3-bar-block",
-	});
-	var newCloseLink = $("<a />", {
-	//href : "#",
-	class: "w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black",
-	onclick: "w3_close()",
-	title: "close menu"
-	});
-	$(newBlock).appendTo("#menuID");
-	if(close == 0 ){
-		$(newCloseLink).appendTo(".w3-bar-block");
-		//close = 1;
-	}
+    checkSiteColor();
 
 
-	for (const [key, value] of Object.entries(menu)) {
-		console.log(value.name);
-		var href
-		var objectIcon
-		var newLink;
+    avatarDivElement.attr("style","display: none;");
+    menuTitleElement.attr("style","display: none;");
 
-		try{
-			if(typeof(value.href) !== "undefined"){
-				href=value.href
-			}
-			else{
-				value.href="https://harness.io/"
-			}
-		}
-		catch{
-			value.href="https://harness.io/"
-		}
-		console.log("href = "+href);
-		try{
-			objectIcon=value.type
-			console.log(objectIcon);
-		}
-		catch{
-			objectIcon="fa-diamond"
-		}
-		var linkID = (value.name).replace(/[^a-zA-Z]/g, "");
+    if (menuStyle == 'menu' && window.location.href.indexOf("home_new.html") > -1) {
+        menu = JSON.parse(cf.variation('Home_Menu', '[    { "type": "fa-users", "name": "Sign in" },   { "type": "fa-eye", "name": "Sign up" },   { "type": "fa-users", "name": "Harness" } ]'))
+        paddingClass = "w3-padding"
+        iconclass = ""
+    }else{
+        menu = JSON.parse(cf.variation('Home_Menu_New', '[    { "type": "fa-users", "name": "Sign in" },   { "type": "fa-eye", "name": "Sign up" },   { "type": "fa-users", "name": "Harness" } ]'))
+        paddingClass = "w3-padding-small"
+        iconclass = "w3-medium"
+    }
+    console.log("Menu Style: "+JSON.stringify(menuStyle));
+    console.log("Menu: "+JSON.stringify(menu));
+    // Bloco Menu
+    $("body").find(".w3-bar-block").remove();
+    var newBlock = $("<div />", {
+        class: "w3-bar-block",
+    });
+    var newCloseLink = $("<a />", {
+    //href : "#",
+    class: "w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black",
+    onclick: "w3_close()",
+    title: "close menu"
+    });
+    $(newBlock).appendTo("#menuID");
+    if(close == 0 ){
+        $(newCloseLink).appendTo(".w3-bar-block");
+        //close = 1;
+    }
 
-		var menuSelected = "w3-"+cf.variation('Home_Menu_Dashboard_Selection_Color',"blue")
 
-		if (value.name == "Home") {
-			var active = ''
-			if (firstStart) {
-				newLink = $("<a />", {
-					//href : "#",
-					class: "w3-bar-item w3-button "+paddingClass+" "+menuSelected+" active",
-					id: "menu-"+linkID,
-					value: href
-				});
-				firstStart = false
-				currentContent = "Home"
-			}else{
-				if (currentContent == value.name) {
-					newLink = $("<a />", {
-						//href : "#",
-						class: "w3-bar-item w3-button "+paddingClass+" "+menuSelected+" active",
-						id: "menu-"+linkID,
-						value: href
-					});
-				} else {
-					newLink = $("<a />", {
-						//href : "#",
-						class: "w3-bar-item w3-button "+paddingClass+" "+menuSelected,
-						id: "menu-"+linkID,
-						value: href
-					});
-				}
+    for (const [key, value] of Object.entries(menu)) {
+        console.log(value.name);
+        var href
+        var objectIcon
+        var newLink;
 
-			}
+        try{
+            if(typeof(value.href) !== "undefined"){
+                href=value.href
+            }
+            else{
+                value.href="https://harness.io/"
+            }
+        }
+        catch{
+            value.href="https://harness.io/"
+        }
+        console.log("href = "+href);
+        try{
+            objectIcon=value.type
+            console.log(objectIcon);
+        }
+        catch{
+            objectIcon="fa-diamond"
+        }
+        var linkID = (value.name).replace(/[^a-zA-Z]/g, "");
 
-		}else{
-			newLink = $("<a />", {
-				//href : "#",
-				class: "w3-bar-item w3-button "+paddingClass,
-				id: "menu-"+linkID,
-				target: "iframeContent",
-				value: href
-			});
-		}
+        var menuSelected = "w3-"+cf.variation('Home_Menu_Dashboard_Selection_Color',"blue")
 
-		menuSelectedStyle=menuSelected
-		$(newLink).append('<i title="'+value.name+'" class="fas '+objectIcon+' fa-fw '+iconclass+'"></i>');
-		if(close == 0 ){
-			$(newCloseLink).append('<i class="fa fa-remove fa-fw"></i>');
-			close = 1;
-		}
+        if (value.name == "Home") {
+            var active = ''
+            if (firstStart) {
+                newLink = $("<a />", {
+                    //href : "#",
+                    class: "w3-bar-item w3-button "+paddingClass+" "+menuSelected+" active",
+                    id: "menu-"+linkID,
+                    value: href
+                });
+                firstStart = false
+                currentContent = "Home"
+            }else{
+                if (currentContent == value.name) {
+                    newLink = $("<a />", {
+                        //href : "#",
+                        class: "w3-bar-item w3-button "+paddingClass+" "+menuSelected+" active",
+                        id: "menu-"+linkID,
+                        value: href
+                    });
+                } else {
+                    newLink = $("<a />", {
+                        //href : "#",
+                        class: "w3-bar-item w3-button "+paddingClass+" "+menuSelected,
+                        id: "menu-"+linkID,
+                        value: href
+                    });
+                }
 
-		$(newLink).on("click", function() {
+            }
 
-						showMenuContent(value.href,value.name, $(this));
-						});
+        }else{
+            newLink = $("<a />", {
+                //href : "#",
+                class: "w3-bar-item w3-button "+paddingClass,
+                id: "menu-"+linkID,
+                target: "iframeContent",
+                value: href
+            });
+        }
 
-		$(newLink).appendTo(".w3-bar-block");
-		console.log(newLink);
-	}
+        menuSelectedStyle=menuSelected
+        $(newLink).append('<i title="'+value.name+'" class="fas '+objectIcon+' fa-fw '+iconclass+'"></i>');
+        if(close == 0 ){
+            $(newCloseLink).append('<i class="fa fa-remove fa-fw"></i>');
+            close = 1;
+        }
+
+        $(newLink).on("click", function() {
+
+                        showMenuContent(value.href,value.name, $(this));
+                        });
+
+        $(newLink).appendTo(".w3-bar-block");
+        console.log(newLink);
+    }
 }
 
 /* END FEATURE FLAGS FUNCTIONS */
@@ -907,11 +907,11 @@ function refresh() {
     if (window.location.href.indexOf("home_new.html") > -1) {
         checkDashboard();
         if (MenuVersion == "v1") {
-			checkMenu();
-		}
-		else if (MenuVersion == "v2") {
-			checkMenuV2();
-		}
+            checkMenu();
+        }
+        else if (MenuVersion == "v2") {
+            checkMenuV2();
+        }
 
     }
     if (window.location.href.indexOf("index.html") > -1) {
