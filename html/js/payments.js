@@ -2,26 +2,17 @@
 
 function showInvoice(){
 
-	var invoiceElement = $("body").find("#invoice");
-	var invoiceDetailElement = $("body").find("#invoiceDetail");
-
-	invoiceElement.attr("style","display: none;");
-
-	invoiceDetailElement.attr("style","display: visibility;");
-
-
+    var invoiceElement = $("body").find("#invoice");
+    var invoiceDetailElement = $("body").find("#invoiceDetail");
+    invoiceElement.attr("style","display: none;");
+    invoiceDetailElement.attr("style","display: visibility;");
 }
 
 function showPayment(){
-
-	var paymentElement = $("body").find("#payment");
-	var invoiceDetailElement = $("body").find("#invoiceDetail");
-
-	invoiceDetailElement.attr("style","display: none;");
-
-	paymentElement.attr("style","display: visibility;");
-
-
+    var paymentElement = $("body").find("#payment");
+    var invoiceDetailElement = $("body").find("#invoiceDetail");
+    invoiceDetailElement.attr("style","display: none;");
+    paymentElement.attr("style","display: visibility;");
 }
 
 function convertLetterToNumber(str) {
@@ -41,14 +32,14 @@ function convertLetterToNumber(str) {
 
 function payInvoice(){
 
-	var paymentElement = $("body").find("#payment");
-	var paymentProcessElement = $("body").find("#paymentProcess");
+    var paymentElement = $("body").find("#payment");
+    var paymentProcessElement = $("body").find("#paymentProcess");
 
-	paymentElement.attr("style","display: none;");
+    paymentElement.attr("style","display: none;");
 
-	paymentProcessElement.attr("style","display: visibility;");
+    paymentProcessElement.attr("style","display: visibility;");
 
-//	var jqxhr = $.ajax( "example.php" )
+//    var jqxhr = $.ajax( "example.php" )
 //      .done(function() {
 //        alert( "success" );
 //      })
@@ -65,23 +56,23 @@ function payInvoice(){
 //    jqxhr.always(function() {
 //      alert( "second complete" );
 //    });
-	console.log("Getting Path name:")
-	var path = window.location.pathname
+    console.log("Getting Path name:")
+    var path = window.location.pathname
 
-	var userPath = path.split('/')[1]
-	console.log(path.split('/')[1])
-	console.log(window.location.host)
-	if((window.location.host).startsWith({ toString: () => "localhost" })){
+    var userPath = path.split('/')[1]
+    console.log(path.split('/')[1])
+    console.log(window.location.host)
+    if((window.location.host).startsWith({ toString: () => "localhost" })){
         userPath = "diegopereiraeng"
     }
 
-	var authAddress = "http://payments-validation.harness-demo.site/"+userPath+"/auth/authorization"
-	console.log("Validation Address: ")
-	console.log(authAddress)
+    var authAddress = "http://payments-validation.harness-demo.site/"+userPath+"/auth/authorization"
+    console.log("Validation Address: ")
+    console.log(authAddress)
 
-	var invoiceID = Math.floor((Math.random()+convertLetterToNumber(validationPath)) * (100+convertLetterToNumber(validationPath)));
-	var validationID = ""
-	var response = $.ajax({
+    var invoiceID = Math.floor((Math.random()+convertLetterToNumber(validationPath)) * (100+convertLetterToNumber(validationPath)));
+    var validationID = ""
+    var response = $.ajax({
             url: authAddress,
             type: 'POST',
             async: false,
@@ -98,48 +89,48 @@ function payInvoice(){
 
 
 
-	if( response.status == 200){
-		validationID = (JSON.parse(response.responseText)).validationID
-		successContentElement.text(response.responseText);
+    if( response.status == 200){
+        validationID = (JSON.parse(response.responseText)).validationID
+        successContentElement.text(response.responseText);
 
-	}
-	else{
+    }
+    else{
 
-		errorContentElement.text(response.responseText);
-	}
-	console.log(response.responseText);
+        errorContentElement.text(response.responseText);
+    }
+    console.log(response.responseText);
 
-	$.ajax({
+    $.ajax({
         url: 'http://payments.harness-demo.site:8082/v1/payments/process?value=1350&validationPath='+userPath+"&invoiceID="+invoiceID+"&validationID="+validationID ,
         type: 'GET',
         success: function(data){
             var paymentProcessElement = $("body").find("#paymentProcess");
-			paymentProcessElement.attr("style","display: none;");
-			var paymentCompleteElement = $("body").find("#complete");
-			var paymentFailedElement = $("body").find("#failed");
+            paymentProcessElement.attr("style","display: none;");
+            var paymentCompleteElement = $("body").find("#complete");
+            var paymentFailedElement = $("body").find("#failed");
 
-			paymentCompleteElement.attr("style","display: visibility;");
+            paymentCompleteElement.attr("style","display: visibility;");
 
         },
         error: function(data) {
             var paymentProcessElement = $("body").find("#paymentProcess");
-			paymentProcessElement.attr("style","display: none;");
-			var paymentFailedElement = $("body").find("#failed");
-			var errorContentElement = $("body").find("#errorContent");
-			var successContentElement = $("body").find("#accepted");
+            paymentProcessElement.attr("style","display: none;");
+            var paymentFailedElement = $("body").find("#failed");
+            var errorContentElement = $("body").find("#errorContent");
+            var successContentElement = $("body").find("#accepted");
 
 
-			if( data.status == 200){
-				var paymentCompleteElement = $("body").find("#complete");
+            if( data.status == 200){
+                var paymentCompleteElement = $("body").find("#complete");
                 paymentCompleteElement.attr("style","display: visibility;");
                 successContentElement.text(data.responseText);
 
-			}
-			else{
-				paymentFailedElement.attr("style","display: visibility;");
-				errorContentElement.text(data.responseText);
-			}
-			console.log(data.responseText);
+            }
+            else{
+                paymentFailedElement.attr("style","display: visibility;");
+                errorContentElement.text(data.responseText);
+            }
+            console.log(data.responseText);
 
 
         }
