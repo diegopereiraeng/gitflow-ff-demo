@@ -24,6 +24,20 @@ function showPayment(){
 
 }
 
+function convertLetterToNumber(str) {
+  if ((typeof str === "string" || str instanceof String) && /^[a-zA-Z]+$/.test(str)) {
+    str = str.toUpperCase();
+    let out = 0,
+      len = str.length;
+    for (pos = 0; pos < len; pos++) {
+      out += (str.charCodeAt(pos) - 64) * Math.pow(26, len - pos - 1);
+    }
+    return out;
+  } else {
+    return undefined;
+  }
+}
+
 
 function payInvoice(){
 
@@ -61,13 +75,42 @@ function payInvoice(){
         userPath = "diegopereiraeng"
     }
 
-	var validationAddress = "http://payments-validation.harness-demo.site/"+userPath+"/validation"
+	var authAddress = "http://payments-validation.harness-demo.site/"+userPath+"/auth/authorization"
 	console.log("Validation Address: ")
-	console.log(validationAddress)
+	console.log(authAddress)
 
+	var invoiceID = Math.floor((Math.random()+convertLetterToNumber(validationPath)) * (100+convertLetterToNumber(validationPath)));
+	var validationID = ""
+	var response = $.ajax({
+            url: authAddress,
+            type: 'POST',
+            async: false,
+            data: JSON.stringify({
+                      "id": invoiceID,
+                      "status": "not verified",
+                      "validationID": ""
+                    }),
+            timeout: 0,
+            headers: {
+               "Content-Type": "application/json"
+            },
+    });
+
+
+
+	if( response.status == 200){
+		validationID = (JSON.parse(response.responseText)).validationID
+		successContentElement.text(response.responseText);
+
+	}
+	else{
+
+		errorContentElement.text(response.responseText);
+	}
+	console.log(response.responseText);
 
 	$.ajax({
-        url: 'http://payments.harness-demo.site:8082/v1/payments/process?value=1350&validationPath='+userPath,
+        url: 'http://payments.harness-demo.site:8082/v1/payments/process?value=1350&validationPath='+userPath+"&invoiceID="+invoiceID+"&validationID="+validationID ,
         type: 'GET',
         success: function(data){
             var paymentProcessElement = $("body").find("#paymentProcess");

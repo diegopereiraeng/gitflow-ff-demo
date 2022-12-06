@@ -1,6 +1,7 @@
 import { initialize, Event } from 'https://unpkg.com/@harnessio/ff-javascript-client-sdk@1.4.10/dist/sdk.client.js'
 
 
+
 var target = getTarget()
 var menuStyle = 'menu'
 var menuSelectedStyle= 'w3-blue'
@@ -12,6 +13,39 @@ const cf = initialize(
     'd1f15499-849d-4d8c-9db8-b615dbd7844c',
     target
 );
+
+function getLocation() {
+		var data
+		var userLocation
+
+		if((typeof(window.localStorage.userLocation) === "undefined")) {
+			data = $.ajax({
+            			url: 'http://ip-api.com/json',
+            			type: 'GET',
+            			async: false
+            		});
+			if( data.status == 200){
+				window.localStorage.setItem('userLocation', data.responseText )
+				userLocation = JSON.parse(window.localStorage.userLocation)
+				//window.localStorage.setItem('userLocation', JSON.stringify(data) )
+				console.log(userLocation)
+
+			}
+			else{
+				userLocation = JSON.parse('{"status":"failed","country":"Unknown","countryCode":"Unknown","region":"Unknown","regionName":"Unknown","city":"Unknown","zip":"Unknown","lat":-37.8281,"lon":-49.4393,"timezone":"Unknown","isp":"Unknown","org":"Unknown","as":"Unknown","query":"Unknown"}')
+				console.log("Failure to get user location")
+			}
+			console.log(data.responseText);
+		} else {
+			userLocation = JSON.parse(window.localStorage.userLocation)
+			console.log("Location is not null");
+		}
+
+
+        return userLocation;
+
+
+    }
 
 function defineTargetObject(id,name,company,email){
     var targetObj
@@ -32,23 +66,52 @@ function defineTargetObject(id,name,company,email){
     return targetObj
 }
 
+function defineTargetObjectPlus(id,name,company,email,userLocation){
+	console.log("user Location: "+userLocation)
+    var targetObj
+    let platform = navigator?.userAgentData?.platform || navigator?.platform || 'unknown'
+    targetObj = {
+        identifier: id,
+        name: name,
+        attributes: {
+            email: email,
+            Company: company,
+            Name: name,
+            timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone),
+            platform: platform,
+            mobile: navigator?.userAgentData?.mobile || navigator?.mobile || 'unknown' ,
+            language: navigator.language,
+			country: userLocation.country,
+			regionName: userLocation.regionName,
+			city: userLocation.city,
+			isp: userLocation.isp,
+			org: (userLocation.org) //.replace(/[^a-zA-Z0-9 ]/g, '')
+
+        }
+    }
+    return targetObj
+}
+
 function getTarget(){
     var targetObj
+    var userLocation = getLocation()
+
+
     if(typeof(Storage) !== "undefined"){
 
         if((typeof(window.localStorage.harnessDemoSignUpEmail) !== "undefined") && typeof(window.localStorage.harnessDemoCompany) !== "undefined"){
             if (window.location.href.indexOf("index.html") > -1) {
-                targetObj = defineTargetObject('Guest','Guest','Community',"community@harness.io")
+                targetObj = defineTargetObjectPlus('Guest-'+userLocation.city,'Guest-'+userLocation.city,'Community',"community@harness.io",userLocation)
                 var customer = window.localStorage.harnessCustomer
                 if (customer == 'true') {
                     var ffID = (window.localStorage.harnessDemoSignUpEmail).replace(/[^a-zA-Z]/g, "");
-                    targetObj = defineTargetObject(ffID,window.localStorage.harnessDemoSignUpName,window.localStorage.harnessDemoSignUpCompany,window.localStorage.harnessDemoSignUpEmail)
+                    targetObj = defineTargetObjectPlus(ffID,window.localStorage.harnessDemoSignUpName,window.localStorage.harnessDemoSignUpCompany,window.localStorage.harnessDemoSignUpEmail,userLocation)
                     menuStyle = 'new_menu'
                 }
             }
             else{
                 var ffID = (window.localStorage.harnessDemoSignUpEmail).replace(/[^a-zA-Z]/g, "");
-                targetObj = defineTargetObject(ffID,window.localStorage.harnessDemoSignUpName,window.localStorage.harnessDemoSignUpCompany,window.localStorage.harnessDemoSignUpEmail)
+                targetObj = defineTargetObjectPlus(ffID,window.localStorage.harnessDemoSignUpName,window.localStorage.harnessDemoSignUpCompany,window.localStorage.harnessDemoSignUpEmail,userLocation)
             }
 
             var welcome = $("body").find("#Welcome")
@@ -57,12 +120,12 @@ function getTarget(){
 
         }
         else{
-            targetObj = defineTargetObject('Guest','Guest','Community',"community@harness.io")
+            targetObj = defineTargetObjectPlus('Guest-'+userLocation.city,'Guest-'+userLocation.city,'Community',"community@harness.io",userLocation)
         }
     }
     else
     {
-        targetObj = defineTargetObject('Guest','Guest','Community',"community@harness.io")
+        targetObj = defineTargetObjectPlus('Guest-'+userLocation.city,'Guest-'+userLocation.city,'Community',"community@harness.io",userLocation)
     }
     return targetObj
 }
