@@ -34,10 +34,11 @@ function payInvoice(){
 
     var paymentElement = $("body").find("#payment");
     var paymentProcessElement = $("body").find("#paymentProcess");
-
+    var processText = $("body").find("#processText");
     paymentElement.attr("style","display: none;");
 
     paymentProcessElement.attr("style","display: visibility;");
+    processText.text("Authorizing your payment, please wait...");
 
 //    var jqxhr = $.ajax( "example.php" )
 //      .done(function() {
@@ -70,6 +71,7 @@ function payInvoice(){
     console.log("Validation Address: ")
     console.log(authAddress)
 
+
     var invoiceID = parseInt(Math.floor((Math.random()+convertLetterToNumber(userPath)) * (100+convertLetterToNumber(userPath))));
     var validationID = ""
     var response = $.ajax({
@@ -90,10 +92,16 @@ function payInvoice(){
 
 
     if( response.status == 200){
-        validationID = (JSON.parse(response.responseText)).validationID
-        successContentElement.text(response.responseText);
-        console.log(response.responseText);
+        var processText = $("body").find("#processText");
 
+        processText.text("Processing your payment, please wait...");
+
+        validationID = (JSON.parse(response.responseText)).validationID
+        //var successContentElement = $("body").find("#accepted");
+        //successContentElement.text(response.responseText);
+
+        console.log(response.responseText);
+        validationID = (JSON.parse(response.responseText)).data.validationID
         $.ajax({
             url: 'http://payments.harness-demo.site:8082/v1/payments/process?value=1350&validationPath='+userPath+"&invoiceID="+invoiceID+"&validationID="+validationID ,
             type: 'GET',
