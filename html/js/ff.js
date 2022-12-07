@@ -71,7 +71,7 @@ function defineTargetObjectPlus(id,name,company,email,userLocation){
     var targetObj
     let platform = navigator?.userAgentData?.platform || navigator?.platform || 'unknown'
     targetObj = {
-        identifier: id,
+        identifier: id.replace(/[^a-zA-Z0-9 ]/g, ''),
         name: name,
         attributes: {
             email: email,
