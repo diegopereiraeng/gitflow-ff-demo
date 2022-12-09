@@ -28,17 +28,22 @@ function convertLetterToNumber(str) {
     return undefined;
   }
 }
-
+function sleep(milliseconds) {
+      return new Promise(resolve => setTimeout(resolve, milliseconds));
+   }
 
 function payInvoice(){
 
     var paymentElement = $("body").find("#payment");
     var paymentProcessElement = $("body").find("#paymentProcess");
     var processText = $("body").find("#processText");
+    var paymentCompleteElement = $("body").find("#complete");
     paymentElement.attr("style","display: none;");
 
     paymentProcessElement.attr("style","display: visibility;");
     processText.text("Authorizing your payment, please wait...");
+    sleep(1000)
+    //await new Promise(r => setTimeout(r, 1000));
 
 //    var jqxhr = $.ajax( "example.php" )
 //      .done(function() {
@@ -71,6 +76,15 @@ function payInvoice(){
     console.log("Validation Address: ")
     console.log(authAddress)
 
+    paymentProcessElement.attr("style","display: none;")
+
+    var successContentElement = $("body").find("#accepted");
+    successContentElement.text("Authorized!");
+    paymentCompleteElement.attr("style","display: visibility;");
+
+    sleep(2000)
+    paymentCompleteElement.attr("style","display: none;");
+    paymentProcessElement.attr("style","display: visibility;")
 
     var invoiceID = parseInt(Math.floor((Math.random()+convertLetterToNumber(userPath)) * (100+convertLetterToNumber(userPath))));
     var validationID = ""

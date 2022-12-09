@@ -422,13 +422,18 @@ function ALL_ALERT_MODAL(flag) {
         }
         btModal.click();
     }else{
-        
+        var btModal = $("body").find("#modalButton");
         try{
-            if (enabled == 'off' && modalStatus != enabled){
+            if (enabled == 'off' && modalStatus != enabled && modalStatus != ""){
                 modalStatus = enabled
                 modalStatusMessage = ""
+                btModal.click();
             }
-            $("body").find("#btnModalOk").click();
+//            if(modalStatus == ""){
+//            }
+
+            //$("body").find("#btnModalOk").click();
+
             
         }catch(e){
             console.log(e)
