@@ -117,7 +117,7 @@ function payInvoice(){
         console.log(response.responseText);
         validationID = (JSON.parse(response.responseText)).data.validationID
         $.ajax({
-            url: 'http://payments.harness-demo.site:8082/v1/payments/process?value=1350&validationPath='+userPath+"&invoiceID="+invoiceID+"&validationID="+validationID ,
+            url: 'http://payments.harness-demo.site:8080/v1/payments/process?value=1350&validationPath='+userPath+"&invoiceID="+invoiceID+"&validationID="+validationID ,
             type: 'GET',
             success: function(data){
                 var paymentProcessElement = $("body").find("#paymentProcess");
