@@ -72,7 +72,7 @@ function payInvoice(){
         userPath = "diegopereiraeng"
     }
 
-    var authAddress = "http://payments-validation.harness-demo.site/"+userPath+"/auth/authorization"
+    var authAddress = "http://"+userPath+"-payments-validation.harness-demo.site/auth/authorization"
     console.log("Validation Address: ")
     console.log(authAddress)
 
