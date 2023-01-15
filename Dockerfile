@@ -4,7 +4,7 @@ EXPOSE 80
 ARG FFKEY
 
 
-RUN if [ -n "$SDK_KEY" ]; then sed -i "s/44e3ffcb-3a5e-4af1-a7f3-ba7a51cbc74b/$FFKEY/g" html/js/ff.js; fi
+RUN if [ -n "$FFKEY" ]; then sed -i "s/44e3ffcb-3a5e-4af1-a7f3-ba7a51cbc74b/$FFKEY/g" html/js/ff.js; fi
 
 COPY html /usr/share/nginx/html/
 CMD bash -c 'cat /usr/share/nginx/html/js/ff.js'
