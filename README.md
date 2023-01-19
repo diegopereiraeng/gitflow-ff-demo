@@ -2,7 +2,7 @@
 
 ## GITFLOW DEMO
 
-1 - Open the file [index.html]([https://github.com/diegopereiraeng/gitflow-ff-demo/edit/dev/html/js/ff.js](https://github.com/diegopereiraeng/gitflow-ff-demo/edit/master/html/index.html])
+1 - Open the file [index.html](https://github.com/diegopereiraeng/gitflow-ff-demo/edit/dev/html/js/ff.js](https://github.com/diegopereiraeng/gitflow-ff-demo/edit/master/html/index.html)
 
 2 - Change the App title in line: 130 to whatever you want.
 
