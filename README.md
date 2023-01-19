@@ -2,9 +2,9 @@
 
 ## GITFLOW DEMO
 
-1 - Open the file [ff.js](https://github.com/diegopereiraeng/gitflow-ff-demo/edit/master/html/js/ff.js)
+1 - Open the file [index.html]([https://github.com/diegopereiraeng/gitflow-ff-demo/edit/dev/html/js/ff.js](https://github.com/diegopereiraeng/gitflow-ff-demo/edit/master/html/index.html)
 
-2 - Make any changes like add a space into the code. (Simulate that a dev gonna change the code - adding a new feature or fixing or enhancing an existing one)
+2 - Change the App title in line: 130 to whatever you want.
 
 3 - Instead of commit direct to dev, please click in "Create a new branch for this commit and start a pull request"
 
