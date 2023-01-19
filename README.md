@@ -2,9 +2,9 @@
 
 ## GITFLOW DEMO
 
-1 - Open the file [index.html](https://github.com/diegopereiraeng/gitflow-ff-demo/edit/dev/html/index.html)
+1 - Open the file [index.html](https://github.com/diegopereiraeng/gitflow-ff-demo/edit/dev/html/index.html) in dev branch
 
-2 - Change the App title in line: 130 to whatever you want.
+2 - Change the App title in line: 126 to whatever you want.
 
 3 - Instead of commit direct to dev, please click in "Create a new branch for this commit and start a pull request"
 
