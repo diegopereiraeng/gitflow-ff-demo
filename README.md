@@ -17,42 +17,15 @@
 Wait for the deployment and access your app on http://ff.harness-demo.site/[YourGitUser]/index.html
 
 
-## FF SETUP
+## NEW SETUP
 
-1 - Go to Harness Software Delivery Demo Account
+Go to Harness Cnfluence inside Sales Engineer search for FF Advanced Demo, inside Demo Blocks.
 
-2 - Select the project GIT FLOW DEMO
+Yuo can find all you need.
 
-3 - Go to Feature Flags Module
+Inside Software Delivery Demo Account, go to Banking Demo Project in Deployments.
 
-4 - Click in Environments
-
-5 - Create an env with your github user name (ex: diegopereiraeng)
-
-6 - Click on the env, create a key, and them create Client-Side token
-
-7 - Save in a safe place this token, We gonna use in the demo at least for the first time...
-
-8 - You are ready to run the demo.
-
-
-## FF DEMO DEPLOY
-
-
-1 - Open the file [ff.js](https://github.com/diegopereiraeng/gitflow-ff-demo/edit/master/html/js/ff.js)
-
-2 - Change the key with your ff key created in the Setup Section.
-
-3 - Instead of commit direct to dev, please click in "Create a new branch for this commit and start a pull request"
-
-4 - Fill the branch name with this name pattern "feature-<your git user>"
-
-5 - Open a PR to dev using the link below. (dev branch should be selected in the left side as target branch, and your feature branch in the right as source branch)
-
-[Open PR](https://github.com/diegopereiraeng/gitflow-ff-demo/compare) 
-
-
-Wait for the deployment and access your app on http://ff.harness-demo.site/<yourGitUser>/index.html
+Run the Onboarding Pipeline passing your github user.
 
 Build and run:
 ```
