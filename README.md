@@ -47,7 +47,7 @@ docker push us.gcr.io/playground-243019/cv-demo-ui:$BUILD
 5. change anything in code (could be add a space in anyfile), and commit to publish the app
 6. Now you app is acessible from: https://your-git-user.github.io/gitflow-ff-demo/html/index.html
 
-# importing Flags
+# importing Lab App Flags into your Harness Account inside a Project
 
 insinde folder flags_json_export, run the script
 
