@@ -39,3 +39,23 @@ Push:
 docker push us.gcr.io/playground-243019/cv-demo-ui:$BUILD
 ```
 
+
+# importing Flags
+
+insinde folder flags_json_export, run the script
+
+install dependencies of python3 script:
+
+```
+pip3 install -r flags_json_exports/requirements.txt
+```
+
+export variables where you want to create flags:
+```
+export API_KEY="YOUR_API_KEY"
+export ACCOUNT_IDENTIFIER="YOUR_ACCOUNT_IDENTIFIER"
+export ORG_IDENTIFIER="YOUR_ORG_IDENTIFIER"
+export PROJECT_IDENTIFIER="YOUR_PROJECT_IDENTIFIER"
+
+python3 flag_creation.py
+```

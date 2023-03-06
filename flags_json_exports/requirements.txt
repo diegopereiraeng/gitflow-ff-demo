@@ -1,0 +1,4 @@
+requests
+os
+python-dotenv
+json
