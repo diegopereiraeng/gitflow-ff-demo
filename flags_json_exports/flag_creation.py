@@ -72,6 +72,6 @@ for flag in feature_flags:
         print(f"response code: {response.status_code}")
 
 print("-----------------------")
-print(f"Total flags: {total}")
-print(f"Created: {len(created)}")
+print(f"Total flags to import: {total}")
+print(f"Total Flags Imported: {len(created)}")
 print("-----------------------")
