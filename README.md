@@ -45,7 +45,7 @@ docker push us.gcr.io/playground-243019/cv-demo-ui:$BUILD
 3. In left menu (Code and Automation), click in Pages
 4. Source: Deploy from branch and Branch: dev , /(root)
 5. change anything in code (could be add a space in anyfile), and commit to publish the app
-6. Now you app is acessible from: https://<your-git-user>.github.io/gitflow-ff-demo/html/index.html
+6. Now you app is acessible from: https://your-git-user.github.io/gitflow-ff-demo/html/index.html
 
 # importing Flags
 
