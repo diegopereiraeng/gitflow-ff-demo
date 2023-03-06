@@ -14,7 +14,7 @@ API_KEY = os.getenv('API_KEY')
 ACCOUNT_IDENTIFIER = os.getenv('ACCOUNT_IDENTIFIER')
 ORG_IDENTIFIER = os.getenv('ORG_IDENTIFIER')
 PROJECT_IDENTIFIER = os.getenv('PROJECT_IDENTIFIER')
-ENVIRONMENT_IDENTIFIER = os.getenv('ENVIRONMENT_IDENTIFIER')
+
 
 # set the endpoint URL
 url = f'https://app.harness.io/gateway/cf/admin/features?accountIdentifier={ACCOUNT_IDENTIFIER}&orgIdentifier={ORG_IDENTIFIER}'
