@@ -1,0 +1,17 @@
+FROM nginx
+
+ARG FFKEY
+ENV SDK_KEY=$FFKEY
+
+COPY html /usr/share/nginx/html/
+
+RUN if [ -n "$SDK_KEY" ]; then sed -i "s/44e3ffcb-3a5e-4af1-a7f3-ba7a51cbc74b/$SDK_KEY/g" /usr/share/nginx/html/js/ff.js; fi
+
+COPY scripts /opt/scripts
+RUN chmod +x /opt/scripts/*.sh
+
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD curl -f http://localhost || exit 1
+
+EXPOSE 80
+CMD ["/bin/bash", "-c", "/opt/scripts/startup.sh"]
