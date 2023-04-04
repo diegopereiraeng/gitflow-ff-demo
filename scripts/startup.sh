@@ -7,7 +7,7 @@ else
   sed -i -r "s/[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*/${FFKEY}/g" /usr/share/nginx/html/js/ff.js; 
 fi;
 
-cat /opt/scripts/nginx.conf >> /etc/nginx/nginx.conf.tmp
+cat /opt/scripts/nginxecs.conf >> /etc/nginx/nginx.conf.tmp
 mv /etc/nginx/nginx.conf.tmp /etc/nginx/nginx.conf
 
 nginx -c /etc/nginx/nginx.conf -g "daemon off;"
