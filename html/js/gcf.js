@@ -5,7 +5,6 @@ function startRequests() {
         var squaresContainer = document.createElement("div");
         squaresContainer.className = "square-container";
         document.body.appendChild(squaresContainer);
-​
         function makeRequest() {
           fetch(url)
             .then(response => response.json())
@@ -29,7 +28,6 @@ function startRequests() {
               }
             });
         }
-​
         function updateStatus(revisions) {
           var status = document.getElementById("status");
           status.innerHTML = "";
@@ -47,7 +45,6 @@ function startRequests() {
             status.innerHTML += "Requests to revision " + revision + ": " + count + " (" + (count / 100 * 100).toFixed(2) + "%)<br>";
           }
         }
-​
         function getColor(revision) {
           var hash = 0;
           for (var i = 0; i < revision.length; i++) {
@@ -58,6 +55,5 @@ function startRequests() {
             .toUpperCase();
           return "#" + "00000".substring(0, 6 - c.length) + c;
         }
-​
         makeRequest();
 }
