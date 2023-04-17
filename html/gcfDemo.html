@@ -1,63 +1,14 @@
-<!DOCTYPE html>
-<html>
+
   <head>
     <title>Google Functions Canary Demo</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-    <script src="./js/gcf.js" charset="UTF-8" type="text/javascript">
-    <style>
-      body {
-        margin: 0;
-        font-family: 'Roboto', sans-serif;
-      }
-      .header {
-        background-color: #dddddd;
-        height: 70px;
-        display: flex;
-        align-items: center;
-        padding: 0 30px;
-      }
-      .logo {
-        width: 150px;
-      }
-      .title {
-        color: rgb(0, 0, 0);
-        font-size: 24px;
-        margin-left: 30px;
-      }
-      .status {
-        margin-top: 50px;
-        font-size: 18px;
-      }
-      .square-container {
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 20px;
-      }
-      .square {
-        width: 10px;
-        height: 10px;
-        margin-right: 2px;
-        margin-bottom: 2px;
-        display: inline-block;
-      }
-      #startButton {
-        margin-top: 20px;
-        font-size: 16px;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <script type="text/javascript" src="js/gcf.js"/>
+    <link href="css/gcf.css" type="text/css" rel="stylesheet"/>
   <body>
     <div class="header">
-      <img class="logo" src="https://assets-global.website-files.com/6222ca42ea87e1bd1aa1d10c/6222d7526cc398da63a4f639_nav-logo.svg" loading="eager" alt="Harness logo" class="navbar-logo_image">
-     <h1 class="title">Google Functions Canary Demo</h1>
+      <img class="logo" src="https://assets-global.website-files.com/6222ca42ea87e1bd1aa1d10c/6222d7526cc398da63a4f639_nav-logo.svg" loading="eager" alt="Harness logo" class="navbar-logo_image"/>
+      <h1 class="title">Google Functions Canary Demo</h1>
     </div>
     <div class="status" id="status"></div>
     <button id="startButton" onclick="startRequests()">Start Requests</button>
   </body>
-</html>
