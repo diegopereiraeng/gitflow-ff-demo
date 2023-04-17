@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Functions Canary Demo</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+      }
+      .header {
+        background-color: #dddddd;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        padding: 0 30px;
+      }
+      .logo {
+        width: 150px;
+      }
+      .title {
+        color: rgb(0, 0, 0);
+        font-size: 24px;
+        margin-left: 30px;
+      }
+      .status {
+        margin-top: 50px;
+        font-size: 18px;
+      }
+      .square-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .square {
+        width: 10px;
+        height: 10px;
+        margin-right: 2px;
+        margin-bottom: 2px;
+        display: inline-block;
+      }
+      #startButton {
+        margin-top: 20px;
+        font-size: 16px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img class="logo" src="https://assets-global.website-files.com/6222ca42ea87e1bd1aa1d10c/6222d7526cc398da63a4f639_nav-logo.svg" loading="eager" alt="Harness logo" class="navbar-logo_image">
+     <h1 class="title">Google Functions Canary Demo</h1>
+    </div>
+    <div class="status" id="status"></div>
+    <button id="startButton" onclick="startRequests()">Start Requests</button>
+    <script>
+      function startRequests() {
+        var url = "https://canarydemo-prod-tio7kygjlq-uc.a.run.app/";
+        var requestsLeft = 100;
+        var revisions = {};
+        var squaresContainer = document.createElement("div");
+        squaresContainer.className = "square-container";
+        document.body.appendChild(squaresContainer);
+​
+        function makeRequest() {
+          fetch(url)
+            .then(response => response.json())
+            .then(data => {
+              var revision = data.revision;
+              if (!(revision in revisions)) {
+                revisions[revision] = 0;
+              }
+              revisions[revision]++;
+              updateStatus(revisions);
+              requestsLeft--;
+              if (requestsLeft > 0) {
+                makeRequest();
+              }
+            })
+            .catch(error => {
+              console.log("Error:", error);
+              requestsLeft--;
+              if (requestsLeft > 0) {
+                makeRequest();
+              }
+            });
+        }
+​
+        function updateStatus(revisions) {
+          var status = document.getElementById("status");
+          status.innerHTML = "";
+          for (var revision in revisions) {
+            var count = revisions[revision];
+            var squareContainer = document.createElement("div");
+            squareContainer.className = "square-container";
+            for (var i = 0; i < count; i++) {
+              var square = document.createElement("div");
+              square.className = "square";
+              square.style.backgroundColor = getColor(revision);
+              squareContainer.appendChild(square);
+            }
+            status.appendChild(squareContainer);
+            status.innerHTML += "Requests to revision " + revision + ": " + count + " (" + (count / 100 * 100).toFixed(2) + "%)<br>";
+          }
+        }
+​
+        function getColor(revision) {
+          var hash = 0;
+          for (var i = 0; i < revision.length; i++) {
+            hash = revision.charCodeAt(i) + ((hash << 5) - hash);
+          }
+          var c = (hash & 0x00FFFFFF)
+            .toString(16)
+            .toUpperCase();
+          return "#" + "00000".substring(0, 6 - c.length) + c;
+        }
+​
+        makeRequest();
+      }
+    </script>
+  </body>
+</html>
