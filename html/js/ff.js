@@ -1401,7 +1401,7 @@ cf.on(Event.CHANGED, flagInfo => {
     catch(e){
         console.log(e)
     }
-    console.log("FF is Awesome");
+    console.log("New Customers Are Awesome");
 
     if (flagInfo.deleted) {
       console.log('Flag'+flagInfo.flag+' is deleted');
