@@ -17,6 +17,10 @@ animation-play-state: var(--pause-on-hover);
 animation-play-state: var(--pause-on-click);
 }
 
+.CustomerLogos_marqueeImg__1yMDW {
+margin-right: 30px;
+}
+
 .overlay {
 position: absolute;
 width: 100%;
