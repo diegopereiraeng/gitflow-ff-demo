@@ -10,7 +10,7 @@ var currentContent
 var MenuVersion = "v1"
 
 const cf = initialize(
-    'd1f15499-849d-4d8c-9db8-b615dbd7844c',
+    '8e50cb60-0652-45f4-ab15-4343d7a9ae44',
     target
 );
 
@@ -139,6 +139,7 @@ var close = 0;
 var modalStatus = ''
 var modalStatusMessage = ""
 var youtubeStatus = 'off'
+var promoStatus = 'off'
 var ckoStatus = false
 var maintenanceMode = false
 var siteMode = "Site"
@@ -469,6 +470,19 @@ function ALL_YOUTUBE_MODAL(flag) {
         }
 
 
+    }
+}
+
+function NEW_PROMO_ENABLE_2(flag) {
+    console.log('NEW_PROMO_ENABLE_2:' +flag)
+     if (flag != "off" && (promoStatus != flag)) {
+         $('#promo-img').attr("src",flag);
+        $('#Promo').attr("style","display: visibility;");
+         promoStatus = flag
+    }
+    else{
+        $('#Promo').attr("style","display: none;");
+         promoStatus = 'off'
     }
 }
 function Color_Mode(flag) {
