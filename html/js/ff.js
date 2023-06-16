@@ -139,6 +139,7 @@ var close = 0;
 var modalStatus = ''
 var modalStatusMessage = ""
 var youtubeStatus = 'off'
+var promoStatus = 'off'
 var ckoStatus = false
 var maintenanceMode = false
 var siteMode = "Site"
@@ -469,6 +470,19 @@ function ALL_YOUTUBE_MODAL(flag) {
         }
 
 
+    }
+}
+
+function NEW_PROMO_ENABLE_2(flag) {
+    console.log('NEW_PROMO_ENABLE_2:' +flag)
+     if (flag != "off" && (promoStatus != flag)) {
+         $('#promo-img').attr("src",flag);
+        $('#Promo').attr("style","display: visibility;");
+         promoStatus = flag
+    }
+    else{
+        $('#Promo').attr("style","display: none;");
+         promoStatus = 'off'
     }
 }
 function Color_Mode(flag) {
