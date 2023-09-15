@@ -27,6 +27,10 @@ async function runLighthouse() {
     console.log(`Browser running at ${browserURL}`);
     console.log(`Browser port is ${browserPort}`);
 
+    // Add a delay to give the browser time to launch
+    console.log('Waiting for browser to launch...');
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    console.log('Browser launched!');
     baseURLs.forEach(baseURL => {
         pagesToBeTested.forEach(page => {
         const fullURL = `${baseURL}${page.url}?env=${process.argv[2]}`;
