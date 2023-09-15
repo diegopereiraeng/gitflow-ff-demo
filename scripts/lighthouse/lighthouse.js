@@ -19,7 +19,8 @@ const DATA_POINTS = {
 };
 
 async function runLighthouse() {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+
     const browserURL = browser.wsEndpoint();
     const browserPort = browserURL.split(':')[2].split('/')[0];
 
