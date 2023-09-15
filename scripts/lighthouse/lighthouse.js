@@ -18,38 +18,44 @@ const DATA_POINTS = {
   SEO: 'seo',
 };
 
-async function runLighthouse(url, pageName) {
-  const browser = await puppeteer.launch();
-  const browserURL = browser.wsEndpoint();
-  const port = browserURL.split(':')[2].split('/')[0];
+async function runLighthouse() {
+    const browser = await puppeteer.launch();
+    const browserURL = browser.wsEndpoint();
+    const browserPort = browserURL.split(':')[2].split('/')[0];
 
-  exec(`lighthouse ${url} --port=${port} --output json`, (err, stdout, stderr) => {
-    if (err) {
-      console.error(`Error: ${stderr}`);
-      return;
-    }
+    console.log(`Browser running at ${browserURL}`);
+    console.log(`Browser port is ${browserPort}`);
 
-    const jsonOutput = JSON.parse(stdout);
-    const scores = {
-      url,
-      [DATA_POINTS.PERFORMANCE]: jsonOutput.categories.performance.score * 100,
-      [DATA_POINTS.ACCESSIBILITY]: jsonOutput.categories.accessibility.score * 100,
-      [DATA_POINTS.BEST_PRACTICES]: jsonOutput.categories['best-practices'].score * 100,
-      [DATA_POINTS.SEO]: jsonOutput.categories.seo.score * 100
-    };
+    baseURLs.forEach(baseURL => {
+        pagesToBeTested.forEach(page => {
+        const fullURL = `${baseURL}${page.url}?env=${process.argv[2]}`;
+        exec(`lighthouse ${fullURL} --output json --port=${browserPort}`, (err, stdout, stderr) => {
+            if (err) {
+            console.error(`Error: ${stderr}`);
+            return;
+            }
 
-    console.log(scores);
+            const jsonOutput = JSON.parse(stdout);
+            const scores = {
+            url: fullURL,
+            [DATA_POINTS.PERFORMANCE]: jsonOutput.categories.performance.score * 100,
+            [DATA_POINTS.ACCESSIBILITY]: jsonOutput.categories.accessibility.score * 100,
+            [DATA_POINTS.BEST_PRACTICES]: jsonOutput.categories['best-practices'].score * 100,
+            [DATA_POINTS.SEO]: jsonOutput.categories.seo.score * 100,
+            };
 
-    // Storing the categories object as a string in an environment variable
-    process.env[`CATEGORIES_${pageName.toUpperCase()}`] = JSON.stringify(jsonOutput.categories);
+            console.log(scores);
 
-    // Now you can access this environment variable elsewhere in your script like this:
-    const categories = JSON.parse(process.env[`CATEGORIES_${pageName.toUpperCase()}`]);
-    console.log(`Categories for ${pageName}:`, categories);
-  });
+            process.env[`CATEGORIES_${page.name.toUpperCase()}`] = JSON.stringify(jsonOutput.categories);
+            const categories = JSON.parse(process.env[`CATEGORIES_${page.name.toUpperCase()}`]);
+            console.log(`Categories for ${page.name}:`, categories);
+        });
+        });
+    });
 
-  await browser.close();
+    await browser.close();
 }
+
 
 function startTesting(env) {
   const baseURL = environments[env];
