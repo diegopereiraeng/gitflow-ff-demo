@@ -16,7 +16,6 @@
 
 Wait for the deployment and access your app on http://ff.harness-demo.site/[YourGitUser]/index.html
 
-
 ## NEW SETUP
 
 Go to Harness Cnfluence inside Sales Engineer search for FF Advanced Demo, inside Demo Blocks.
