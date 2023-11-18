@@ -1,0 +1,24 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: banking-frontend
+  description: Banking Front End App to demo Harness modules
+  links:
+    - url: http://ff.harness-demo.site/diegopereiraeng/index.html
+      title: Prod Website
+      icon: dashboard
+      type: Banking FrontEnd
+  tags: 
+    - javascript
+  annotations:
+    harness.io/project-url: https://app.harness.io/ng/account/6_vVHzo9Qeu9fXvj-AcbCQ/home/orgs/default/projects/GIT_FLOW_DEMO/details
+    harness.io/cd-serviceId: BankingAppUI
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: diegopereiraeng/gitflow-ff-demo
+    backstage.io/kubernetes-label-selector: 'backstage.io/kubernetes-id=banking-app-diegopereiraeng'
+    backstage.io/kubernetes-id: banking-app-diegopereiraeng
+spec:
+  type: service
+  lifecycle: prod
+  owner: Diego
+  system: GIT_FLOW_DEMO
