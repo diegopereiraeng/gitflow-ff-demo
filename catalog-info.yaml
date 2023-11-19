@@ -20,5 +20,5 @@ metadata:
 spec:
   type: service
   lifecycle: prod
-  owner: Diego
-  system: GIT_FLOW_DEMO
+  owner: diego
+  system: Banking_Demo

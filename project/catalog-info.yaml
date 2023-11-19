@@ -1,6 +1,6 @@
 kind: System
 spec:
-  owner: Diego
+  owner: diego
   domain: Core_Banking
 apiVersion: backstage.io/v1alpha1
 metadata:
