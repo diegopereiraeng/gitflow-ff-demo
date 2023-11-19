@@ -6,17 +6,17 @@ metadata:
   name: Core_Banking
   description: Default Organization
   tags: []
----
-apiVersion: backstage.io/v1alpha1
-kind: User
-metadata:
-  name: diego
-spec:
-  profile:
-    displayName: "Diego Pereira"
-    email: diego.pereira@harness.io
-    picture: https://example.com/staff/jenny-with-party-hat.jpeg
-  memberOf: []
+# ---
+# apiVersion: backstage.io/v1alpha1
+# kind: User
+# metadata:
+#   name: diego
+# spec:
+#   profile:
+#     displayName: "Diego Pereira"
+#     email: diego.pereira@harness.io
+#     picture: https://example.com/staff/jenny-with-party-hat.jpeg
+#   memberOf: []
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Group
