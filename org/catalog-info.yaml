@@ -15,8 +15,8 @@ spec:
   profile:
     displayName: Diego Pereira
     email: diego.pereira@harness.io
-    picture: https://media.licdn.com/dms/image/D4D03AQEdN78rxSrUPw/profile-displayphoto-shrink_100_100/0/1684019867290?e=1705536000&v=beta&t=qEG4vvLXrYsQkRX1XW-igeSG1ZRt8I-QP-VMX4wA75Q
-  memberOf: [csm]
+    picture: https://example.com/staff/jenny-with-party-hat.jpeg
+  memberOf: []
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Group
