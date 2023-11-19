@@ -13,7 +13,7 @@ metadata:
   name: diego
 spec:
   profile:
-    displayName: Diego Pereira
+    displayName: "Diego Pereira"
     email: diego.pereira@harness.io
     picture: https://example.com/staff/jenny-with-party-hat.jpeg
   memberOf: []
