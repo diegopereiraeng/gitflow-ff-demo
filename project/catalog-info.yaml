@@ -2,6 +2,8 @@ kind: System
 spec:
   owner: diego.pereira@harness.io
   domain: Core_Banking
+  dependsOn:
+    - component:Core_Banking
 apiVersion: backstage.io/v1alpha1
 metadata:
   name: Banking_Demo

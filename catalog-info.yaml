@@ -22,3 +22,5 @@ spec:
   lifecycle: prod
   owner: diego.pereira@harness.io
   system: Banking_Demo
+  dependsOn:
+    - component:Banking_Demo
