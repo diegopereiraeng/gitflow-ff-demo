@@ -1,0 +1,33 @@
+kind: Domain
+spec:
+  owner: Diego
+apiVersion: backstage.io/v1alpha1
+metadata:
+  name: Core_Banking
+  description: Default Organization
+  tags: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: Diego
+spec:
+  profile:
+    displayName: Diego Pereira
+    email: diego.pereira@harness.io
+    picture: https://media.licdn.com/dms/image/D4D03AQEdN78rxSrUPw/profile-displayphoto-shrink_100_100/0/1684019867290?e=1705536000&v=beta&t=qEG4vvLXrYsQkRX1XW-igeSG1ZRt8I-QP-VMX4wA75Q
+  memberOf: [CSM]
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: CSM
+  description: The CSM/TSM group
+spec:
+  type: team
+  profile:
+    displayName: CSM
+    email: csm@harness.io
+    picture: https://example.com/groups/bu-infrastructure.jpeg
+  children: []
+  members: [Diego]
