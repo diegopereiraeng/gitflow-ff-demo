@@ -1,6 +1,6 @@
 kind: System
 spec:
-  owner: diego
+  owner: diego.pereira@harness.io
   domain: Core_Banking
 apiVersion: backstage.io/v1alpha1
 metadata:

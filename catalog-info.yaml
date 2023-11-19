@@ -20,5 +20,5 @@ metadata:
 spec:
   type: service
   lifecycle: prod
-  owner: diego
+  owner: diego.pereira@harness.io
   system: Banking_Demo

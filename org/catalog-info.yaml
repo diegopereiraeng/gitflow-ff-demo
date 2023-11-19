@@ -1,6 +1,6 @@
 kind: Domain
 spec:
-  owner: diego
+  owner: diego.pereira@harness.io
 apiVersion: backstage.io/v1alpha1
 metadata:
   name: Core_Banking
@@ -18,16 +18,16 @@ metadata:
 #     picture: https://example.com/staff/jenny-with-party-hat.jpeg
 #   memberOf: []
 ---
-apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
-  name: csm
-  description: The CSM/TSM group
-spec:
-  type: team
-  profile:
-    displayName: CSM
-    email: csm@harness.io
-    picture: https://example.com/groups/bu-infrastructure.jpeg
-  children: []
-  members: [diego]
+# apiVersion: backstage.io/v1alpha1
+# kind: Group
+# metadata:
+#   name: csm
+#   description: The CSM/TSM group
+# spec:
+#   type: team
+#   profile:
+#     displayName: CSM
+#     email: csm@harness.io
+#     picture: https://example.com/groups/bu-infrastructure.jpeg
+#   children: []
+#   members: [diego.pereira@harness.io]
