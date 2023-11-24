@@ -17,6 +17,7 @@ metadata:
     github.com/project-slug: diegopereiraeng/gitflow-ff-demo
     backstage.io/kubernetes-label-selector: 'backstage.io/kubernetes-id=banking-app-diegopereiraeng'
     backstage.io/kubernetes-id: banking-app-diegopereiraeng
+    backstage.io/source-location: 'url:https://github.com/diegopereiraeng/gitflow-ff-demo/tree/master'
 spec:
   type: service
   lifecycle: prod
