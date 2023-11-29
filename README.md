@@ -66,3 +66,4 @@ export PROJECT_IDENTIFIER="YOUR_PROJECT_IDENTIFIER"
 
 python3 flag_creation.py
 ```
+
