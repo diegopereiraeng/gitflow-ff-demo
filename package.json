@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@harnessio/ff-javascript-client-sdk": "^1.4.9"
+    "@harnessio/ff-javascript-client-sdk": "^1.4.10"
   },
   "scripts": {
     "lint": "eslint --ext .js html --config eslintrc.json --format junit --output-file html/reports/eslint/eslint.xml",
