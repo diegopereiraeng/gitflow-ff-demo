@@ -224,6 +224,7 @@ function HalloweenSongEnabled(flag) {
     }
 }
 
+
 function Home_RegionMAP(flag) {
         var map = $("body").find("#regionMap");
         if(flag == 'true'){
