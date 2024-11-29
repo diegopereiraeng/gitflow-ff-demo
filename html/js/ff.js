@@ -1,7 +1,6 @@
 import { initialize, Event } from 'https://unpkg.com/@harnessio/ff-javascript-client-sdk@1.4.14/dist/sdk.client.js'
 
 
-
 var target = getTarget()
 var menuStyle = 'menu'
 var menuSelectedStyle= 'w3-blue'
